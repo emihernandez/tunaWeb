@@ -1,0 +1,87 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form"> 
+                <div class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="tanqueAModificar.marca" required>
+                          <option value ="">Seleccione una marca</option>
+                          <option value="Alfa Laval">Alfa Laval</option>
+                          <option value="Bauducco">Bauducco</option>
+                          <option value="Dairy Master">Dairy Master</option>
+                          <option value="De Laval">De Laval</option>
+                          <option value="Eistcheid">Eistcheid</option>
+                          <option value="Kesell">Kesell</option>
+                          <option value="Fontsere">Fontsere</option>
+                          <option value="Gea Westfalia">Gea Westfalia</option>
+                          <option value="Japy">Japy</option>
+                          <option value="Milk Master">Milk Master</option>
+                          <option value="Milk Plan">Milk Plan</option>
+                          <option value="Mueller">Mueller</option>
+                          <option value="Packo">Packo</option>
+                          <option value="Prominox">Prominox</option>
+                          <option value="Reafrio">Reafrio</option>
+                          <option value="Rodeg">Rodeg</option>
+                          <option value="Ruakura">Ruakura</option>
+                          <option value="Serap">Serap</option>
+                          <option value="Setpar">Setpar</option>
+                          <option value="Surge">Surge</option>
+                          <option value="Urumilk">Urumilk</option>
+                          <option value="Otro">Otro</option>
+                      </select>
+                </div>             
+                <div class="form-group" ng-class="{ 'has-error' : form.volumen.$invalid }">
+                    <label>Volúmen (litros)</label>
+                    <input class="form-control" type="number" min="0" name="volumen" ng-model="tanqueAModificar.volumen">
+                    <p ng-show="form.volumen.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div class="form-group" ng-class="{ 'has-error' : form.antiguedad.$invalid }">
+                    <label>Antiguedad (años)</label>
+                    <input class="form-control" type="number" min="0" name="antiguedad" ng-model="tanqueAModificar.antiguedad">
+                    <p ng-show="form.antiguedad.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>
+                <div class="form-group">
+                      <label>Clase</label>
+                      <select class="form-control" ng-model="tanqueAModificar.clase">
+                          <option value ="">Seleccione una opción</option>
+                          <option value="2 ordenes">2 ordeñes</option>
+                          <option value="3 ordenes">3 ordeñes</option>
+                          <option value="4 ordenes">4 ordeñes</option>
+                          <option value="No sabe">No sabe</option>
+                      </select>
+                </div> 
+                <div class="checkbox">
+                  <label><input type="checkbox" value="false" name="intemperieBoolean" ng-init="form.intemperieBoolean=false" 
+                     ng-model="tanqueAModificar.intemperieBoolean">Tanque a la intemperie</label>
+               </div>
+               <div class="form-group" ng-class="{ 'has-error' : form.tiempoEnfriamiento.$invalid }">
+                    <label>Tiempo enfriamiento post ordeñe (minutos)</label>
+                    <input class="form-control" type="number" min="0" name="tiempoEnfriamiento" ng-model="tanqueAModificar.tiempoEnfriamiento">
+                    <p ng-show="form.tiempoEnfriamiento.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div class="checkbox">
+                  <label><input type="checkbox" value="false" name="tanqueCalorBoolean" ng-init="form.tanqueCalorBoolean=false" 
+                     ng-model="tanqueAModificar.tanqueCalorBoolean">Posee tanque recuperador de calor</label>
+               </div>
+                <div ng-show="tanqueAModificar.tanqueCalor==true" class="form-group" ng-class="{ 'has-error' : form.capacidad.$invalid }">
+                    <label>Capacidad del tanque recuperador de calor (litros)</label>
+                    <input class="form-control" type="number" min="0" name="capacidad" ng-model="tanqueAModificar.capacidad">
+                    <p ng-show="form.capacidad.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>              
+            </form>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ok()">Guardar</button>
+              <p ng-show="!tanqueAModificar.marca" class="help-block">Debe seleccionar la marca del tanque </p>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

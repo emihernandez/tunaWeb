@@ -1,0 +1,419 @@
+
+                                         
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Ver contrato</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Contrato</a></li>
+      <li class="active"><a href="#">Ver</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row col-lg-offset-1" style="padding-top: 5px;">
+        
+        <div class="col-lg-9" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Datos del contrato
+                </div>
+                <div class="panel-body">
+                    <div class="panel box box-primary">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="datosPersonalesIsCollapsed = !datosPersonalesIsCollapsed">
+                                Datos Personales
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="datosPersonalesIsCollapsed">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>CI/Pasaporte</label>
+                                    <label class="form-control">{{contrato.ciCliente}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Tipo de documento</label>
+                                    <label class="form-control">{{contrato.tipoCiString}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Nombres</label> 
+                                    <label class="form-control">{{contrato.nombres}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3 ">
+                                <div class="form-group">
+                                    <label>Apellidos</label> 
+                                    <label class="form-control">{{contrato.apellidos}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3 ">
+                                <div class="form-group">
+                                <label>Fecha de nacimiento</label>
+                                    <label class="form-control">{{contrato.fechaNacimiento}}</label>
+                                    <p class="help-block"></p> 
+                                </div>
+                              </div> 
+
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3 ">
+                                  <div class="form-group">
+                                    <label>Genero</label>
+                                    <label class="form-control">{{contrato.genero}}</label>
+                                    <p class="help-block"></p>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Telefono fijo</label> 
+                                    <label class="form-control">{{contrato.telefonoFijo}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Celular</label> 
+                                    <label class="form-control">{{contrato.celular}}</label>
+                                    <p class="help-block"></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label>Email</label>
+                                <label class="form-control">{{contrato.email}}</label>
+                                <p class="help-block"></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                  <label>Tipo de tramite</label>
+                                  <label class="form-control">{{contrato.tipoTramiteString}}</label>
+                                  <p class="help-block"></p>
+                              </div>
+                            </div>  
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group" >
+                                  <label>Servicio</label>
+                                  <label class="form-control">{{contrato.servicioNombre}}</label>
+                                  <p class="help-block"></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                  <label>Plazo contractual</label>
+                                  <label class="form-control">{{contratoAux.plazo}}</label>
+                                  <p class="help-block"></p>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-6" ng-show="contrato.tipoTramite !== 1" ng-hide= "contrato.tipoTramite == 3" ng-if="contrato.tipoTramite !== 4">
+                                <div class="checkbox" readonly >
+                                  <label></label>
+                                  <label><input type="checkbox" disabled="disabled" value="aplicaTarifa" ng-model="aplicaTarifa" ng-init="aplicaTarifa">Aplica tarifa cambio de producto</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkbox" ng-show="contrato.tipoTramite == 4" readonly >
+                                  <label></label>
+                                  <label><input type="checkbox" disabled="disabled" value="aplicaTarifaNuevoServicio" ng-model="aplicaTarifaNuevoServicio" ng-init="aplicaTarifaNuevoServicio">Aplica tarifa nuevo servicio</label>
+                                </div>
+                            </div>
+
+                          </div>
+                        </div>
+                </div>
+
+                <div class="panel box box-info">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a ng-click="domicilioIsCollapsed = !domicilioIsCollapsed">
+                        Datos del domicilio
+                      </a>
+                    </h4>
+                  </div>
+                  <div collapse="domicilioIsCollapsed">  
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Localidad</label> 
+                            <label class="form-control">{{contrato.localidad}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Departamento</label> 
+                            <label class="form-control">{{contrato.departamento}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Calle</label> 
+                            <label class="form-control">{{contrato.calle}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Número de puerta</label> 
+                            <label class="form-control">{{contrato.nroPuerta}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Apto</label> 
+                            <label class="form-control">{{contrato.apto}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Padrón</label> 
+                            <label class="form-control">{{contrato.padron}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Manzana</label> 
+                            <label class="form-control">{{contrato.manzana}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Solar</label> 
+                            <label class="form-control">{{contrato.solar}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="panel box box-info">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a ng-click="domicilioInstalacionIsCollapsed = !domicilioInstalacionIsCollapsed">
+                        Domicilio de instalación
+                      </a>
+                    </h4>
+                  </div>
+                  <div collapse="domicilioInstalacionIsCollapsed">  
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Localidad</label> 
+                            <label class="form-control">{{contrato.domicilio.localidad}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Departamento</label> 
+                            <label class="form-control">{{contrato.domicilio.departamento}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Calle</label> 
+                            <label class="form-control">{{contrato.domicilio.calle}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Número de puerta</label> 
+                            <label class="form-control">{{contrato.domicilio.nroPuerta}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Apto</label> 
+                            <label class="form-control">{{contrato.domicilio.apto}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Padrón</label> 
+                            <label class="form-control">{{contrato.domicilio.padron}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Manzana</label> 
+                            <label class="form-control">{{contrato.domicilio.manzana}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Solar</label> 
+                            <label class="form-control">{{contrato.domicilio.solar}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="panel box box-info">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a ng-click="facturaIsCollapsed = !facturaIsCollapsed">
+                        Envío de factura
+                      </a>
+                    </h4>
+                  </div>
+                  <div collapse="facturaIsCollapsed">  
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Localidad</label> 
+                            <label class="form-control">{{contrato.factura.localidad}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Departamento</label> 
+                            <label class="form-control">{{contrato.factura.departamento}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Calle</label> 
+                            <label class="form-control">{{contrato.factura.calle}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Número de puerta</label> 
+                            <label class="form-control">{{contrato.factura.nroPuerta}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Apto</label> 
+                            <label class="form-control">{{contrato.factura.apto}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Padrón</label> 
+                            <label class="form-control">{{contrato.factura.padron}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Manzana</label> 
+                            <label class="form-control">{{contrato.factura.manzana}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Solar</label> 
+                            <label class="form-control">{{contrato.factura.solar}}</label>
+                            <p class="help-block"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <button class="btn btn-primary" <a ui-sref="dashboard.ContratoListarVer" href="#">Volver</a></button>
+                    </div>
+                  </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+  </section><!-- /.content -->
+
+

@@ -1,0 +1,194 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form"> 
+                <div class="form-group">
+                      <label>Equipo</label>
+                      <select class="form-control" ng-model="equipoAModificar.equipo" required>
+                          <option value ="">Seleccione una opción</option>
+                          <option value="Termotanque">Termotanque</option>
+                          <option value="Colector solar">Colector solar</option>
+                          <option value="Recuperador de calor">Recuperador de calor</option>
+                      </select>
+                </div> 
+                <div ng-show="equipoAModificar.equipo">
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="equipoAModificar.marca">
+                          <option value = "">Seleccione una opción</option>
+                          <option value = "Ariston">Ariston</option>
+                          <option value = "Beusa">Beusa</option>
+                          <option value = "Bosch">Bosch</option>
+                          <option value = "Bronx">Bronx</option>
+                          <option value = "Coppens">Coppens</option>
+                          <option value = "Delne">Delne</option>
+                          <option value = "Dikler">Dikler</option>
+                          <option value = "Enxuta">Enxuta</option>
+                          <option value = "Escorial">Escorial</option>
+                          <option value = "Fagor">Fagor</option>
+                          <option value = "Futura">Futura</option>
+                          <option value = "Hyundai">Hyundai</option>
+                          <option value = "Ima">Ima</option>
+                          <option value = "James">James</option>
+                          <option value = "LG">LG</option>
+                          <option value = "Longvie">Longvie</option>
+                          <option value = "Orbis">Orbis</option>
+                          <option value = "Orion">Orion</option>
+                          <option value = "Ormay">Ormay</option>
+                          <option value = "Philco">Philco</option>
+                          <option value = "Queen">Queen</option>
+                          <option value = "Ranser">Ranser</option>
+                          <option value = "Rheem">Rheem</option>
+                          <option value = "Rotel">Rotel</option>
+                          <option value = "Saiar">Saiar</option>
+                          <option value = "Senorial">Señorial</option>
+                          <option value = "Sherman">Sherman</option>
+                          <option value = "Sirium">Sirium</option>
+                          <option value = "Splendid">Splendid</option>
+                          <option value = "Steieder">Steieder</option>
+                          <option value = "Tem">Tem</option>
+                          <option value = "Thermor">Thermor</option>
+                          <option value = "Thompson">Thompson</option>
+                          <option value = "Volcan">Volcan</option>
+                          <option value = "Warners">Warners</option>
+                          <option value = "Zero Watt">Zero Watt</option>
+                          <option value = "Otro">Otro (especificar en comentarios)</option>
+                      </select>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Colector solar'" class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="equipoAModificar.marca">
+                          <option value = "">Seleccione una opción</option>
+                          <option value = "Alfa Solar">Alfa Solar</option>
+                          <option value = "Alosol">Alosol</option>
+                          <option value = "Ariston">Ariston</option>
+                          <option value = "Astrosolar">Astrosolar</option>
+                          <option value = "Babysun">Babysun</option>
+                          <option value = "Cosmosolar">Cosmosolar</option>
+                          <option value = "Ecosolar">Ecosolar</option>
+                          <option value = "Energy Green">Energy Green</option>
+                          <option value = "Fuco">Fuco</option>
+                          <option value = "H2Sol">H2Sol</option>
+                          <option value = "Haier">Haier</option>
+                          <option value = "Kioto">Kioto</option>
+                          <option value = "Nicoll">Nicoll</option>
+                          <option value = "Renovables del Sur">Renovables del Sur</option>
+                          <option value = "Saiar">Saiar</option>
+                          <option value = "Sirium">Sirium</option>
+                          <option value = "Solahart">Solahart</option>
+                          <option value = "Solar CIR">Solar CIR</option>
+                          <option value = "Solaris">Solaris</option>
+                          <option value = "Sunrain">Sunrain</option>
+                          <option value = "Sunstar">Sunstar</option>
+                          <option value = "Otro">Otro (especificar en comentarios)</option>
+                      </select>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Recuperador de calor'" class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="equipoAModificar.marca">
+                          <option value = "">Seleccione una opción</option>
+                          <option value = "Alfa Solar">Alfa Solar</option>
+                          <option value = "Alosol">Alosol</option>
+                          <option value = "Ariston">Ariston</option>
+                          <option value = "Astrosolar">Astrosolar</option>
+                          <option value = "Babysun">Babysun</option>
+                          <option value = "Cosmosolar">Cosmosolar</option>
+                          <option value = "Ecosolar">Ecosolar</option>
+                          <option value = "Energy Green">Energy Green</option>
+                          <option value = "Fuco">Fuco</option>
+                          <option value = "H2Sol">H2Sol</option>
+                          <option value = "Haier">Haier</option>
+                          <option value = "Kioto">Kioto</option>
+                          <option value = "Nicoll">Nicoll</option>
+                          <option value = "Renovables del Sur">Renovables del Sur</option>
+                          <option value = "Saiar">Saiar</option>
+                          <option value = "Sirium">Sirium</option>
+                          <option value = "Solahart">Solahart</option>
+                          <option value = "Solar CIR">Solar CIR</option>
+                          <option value = "Solaris">Solaris</option>
+                          <option value = "Sunrain">Sunrain</option>
+                          <option value = "Sunstar">Sunstar</option>
+                          <option value = "Otro">Otro (especificar en comentarios)</option>
+                      </select>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group" ng-class="{ 'has-error' : form.energia.$invalid }">
+                    <label>Fuente de energía</label>
+                    <select class="form-control" ng-model="equipoAModificar.energia">
+                          <option value ="">Seleccione una opción</option>
+                          <option value="Electricidad">Electricidad</option>
+                          <option value="Supergas">Supergás</option>
+                          <option value="Lenia">Leña</option>
+                      </select>
+                </div>            
+                <div class="form-group" ng-class="{ 'has-error' : form.volumen.$invalid }">
+                    <label>Volúmen (litros)</label>
+                    <input class="form-control" type="number" min="0" name="volumen" ng-model="equipoAModificar.volumen">
+                    <p ng-show="form.volumen.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group" ng-class="{ 'has-error' : form.potencia.$invalid }">
+                    <label>Potencia (kW)</label>
+                    <input class="form-control" type="number" min="0" name="potencia" ng-model="equipoAModificar.potencia">
+                    <p ng-show="form.potencia.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>
+                <div class="form-group">
+                    <label>Etiqueta eficiencia energética</label>
+                    <input class="form-control" ng-model="equipoAModificar.etiqueta">
+                </div>
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="checkbox">
+                  <label><input type="checkbox" value="false" name="timerBoolean" ng-init="form.timerBoolean=false" 
+                     ng-model="equipoAModificar.timerBoolean">Tiene timer</label>
+               </div>  
+               <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group" ng-class="{ 'has-error' : form.horas.$invalid }">
+                    <label>Horas de uso</label>
+                    <input class="form-control" type="number" min="0" name="horas" ng-model="equipoAModificar.horas">
+                    <p ng-show="form.horas.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group">
+                  <label>Horario</label>
+                  <textarea ng-model="equipoAModificar.horario" class="textarea" style="width: 95%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                </div>
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="form-group" ng-class="{ 'has-error' : form.temperatura.$invalid }">
+                    <label>Temperatura seteada (°C)</label>
+                    <input class="form-control" type="number" min="0" name="temperatura" ng-model="equipoAModificar.temperatura">
+                    <p ng-show="form.temperatura.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div ng-show="equipoAModificar.equipo == 'Termotanque'" class="checkbox">
+                  <label><input type="checkbox" value="false" name="intemperieBoolean" ng-init="form.intemperieBoolean=false" 
+                     ng-model="equipoAModificar.intemperieBoolean">Tanque a la intemperie</label>
+               </div>
+               <div ng-show="equipoAModificar.equipo != 'Termotanque'" class="form-group" ng-class="{ 'has-error' : form.temperatura.$invalid }">
+                    <label>Temperatura de salida (°C)</label>
+                    <input class="form-control" type="number" min="0" name="temperatura" ng-model="equipoAModificar.temperatura">
+                    <p ng-show="form.temperatura.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div ng-show="equipoAModificar.equipo != 'Termotanque'" class="checkbox">
+                  <label><input type="checkbox" value="false" name="respaldoElectricoBoolean" ng-init="form.respaldoElectricoBoolean=false" 
+                     ng-model="equipoAModificar.respaldoElectricoBoolean">Tiene respaldo eléctrico</label>
+               </div>  
+                <div class="form-group" ng-class="{ 'has-error' : form.estado.$invalid }">
+                    <label>Estado</label>
+                    <select class="form-control" ng-model="equipoAModificar.estado">
+                          <option value ="">Seleccione una opción</option>
+                          <option value="Deficiente">Deficiente</option>
+                          <option value="Regular">Regular</option>
+                          <option value="Bueno">Bueno</option>
+                      </select>
+                </div>  
+                </div>              
+            </form>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ok()">Guardar</button>
+              <p ng-show="!equipoAModificar.equipo" class="help-block">Debe seleccionar el tipo de equipo</p>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

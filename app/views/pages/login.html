@@ -1,0 +1,38 @@
+<div class="login-box">
+<script>
+  document.body.style.backgroundColor = "#d2d6de";
+</script>
+<!-- <div style="align:center">
+<img style="padding-top:60px" src="../../images/conaprole.jpeg"  height="152"  width="152">
+</div> -->
+    <div class="login-logo">
+      <b>TUNA</b> Admin
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Ingrese usuario y contraseña para acceder al sistema</p>
+      <!-- <form action="../../index2.html" method="post"> -->
+      <form ng-submit="login()">
+        <div class="form-group has-feedback">
+          <input type="string" class="form-control" placeholder="Usuario" ng-model="user.name"  autofocus> <!-- {{offline?required:'''}} -->
+          <span class="glyphicon form-control-feedback"></span>
+          <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> -->
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="Contraseña" ng-model="user.pass">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+                <div class="row">
+          <div class="col-lg-6 col-xs-6 col-lg-offset-3 col-xs-offset-3 col-sm-offset-3" >
+            <!-- <button  class="btn btn-primary btn-block btn-flat" ng-click="login()">Ingresar</button> -->
+            <button  class="btn btn-primary btn-block btn-flat">Ingresar</button>
+            <!-- <label><input type="checkbox" value="" ng-model="offline">Offline</label> -->
+          </div><!-- /.col -->
+        </div>
+        <div class="row">
+  </br><!-- /.col -->
+        </div>
+
+      </form>
+      <!-- <a href="#">I forgot my password</a><br> -->
+    </div>
+  </div>

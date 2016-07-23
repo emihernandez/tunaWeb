@@ -1,0 +1,96 @@
+<div style="min-height:970px">
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Listado de contratos</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Contrato</a></li>
+      <li class="active"><a href="#">Listar</a></li>
+    </ol>
+  </section>
+  <section class="content">
+ 
+    
+    <div class="row col-lg-offset-1" style="padding-top: 50px;" >
+       <div class="col-lg-11 col-md-10">
+        <div class="box">           
+            <div class="box-body " >
+              <br/>
+                <div class="tableScroll">
+                  
+                  <div class="panel panel-info">
+                    <div class="panel-heading" >
+                      Filtros
+                    </div>
+                    <div >
+                      <div class="panel-body">
+                          
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <label>Estados</label>
+                                <select ng-init="estadoSeleccionado"
+                                      ng-options="estadoOpcion.nombre for estadoOpcion in contratoOpcionesEstados" ng-model="estadoSeleccionado" ng-change="contratoFiltroEstado()" ></select>
+                            </div>
+                            <div class="col-lg-3">
+                              <label>Comisión paga?</label>
+                              <select ng-init="comisionSeleccionado"
+                                      ng-options="comisionOpcion.text for comisionOpcion in contratoOpcionesComision" 
+                                      ng-model="comisionSeleccionado" ng-change="contratoFiltroComision()" ></select>
+                            </div>  
+
+                            <div class="col-lg-3">
+                              <label>Departamento 1</label>
+                                  <select ng-init="departamento1Seleccionado"
+                                      ng-options="depto1Opcion.nombre for depto1Opcion in departamentosFiltrar" 
+                                      ng-model="departamento1Seleccionado" ng-change="contratoFiltroComision()" ></select>
+                            </div>
+
+                            <div class="col-lg-3">
+                              <label>Departamento 2</label>
+                                  <select ng-init="departamento2Seleccionado"
+                                      ng-options="depto2Opcion.nombre for depto2Opcion in departamentosFiltrar" 
+                                      ng-model="departamento2Seleccionado" ng-change="contratoFiltroComision()" ></select>
+                            </div>
+
+                          </div>
+                          <br/>
+                          <div class="row">
+                            <div class="col-lg-2">
+                              <label>Fecha del remito</label>
+                                  <input class="form-control" ng-model="fechaSeleccionado" ng-change="contratoFiltroFechaRemito()"type="date" >
+                                  <p class="help-block"></p> 
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-7">
+                            </div>
+                            
+                            <div class="col-lg-2">
+                              <button class="btn btn-default" ng-click="restablecerFiltrosGenerarContrato()">Restablecer filtros</button>
+                            </div>
+
+                            <div class="col-lg-2">
+                              <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="exportarBaseContratos()">Exportar contratos a Excel</button>
+                            </div>
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row col-lg-12">
+                    <table id="listaContratosModificar"  datatable="" dt-options="dtOptionsGenerar" dt-columns="dtColumnsGenerar" dt-instance="dtInstance" cellspacing="0" class="table table-bordered table-striped" width="100%"></table> 
+                  </div>
+               </div>
+              </table>
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+      </div>
+    </div>
+   
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+

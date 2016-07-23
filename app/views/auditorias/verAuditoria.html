@@ -1,0 +1,1968 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Auditoría
+      <small>Relevamiento telefónico</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Auditoría</a></li>
+      <li class="active"><a href="#">Listar</a></li>
+      <li class="active"><a href="#">Relevamiento telefónico</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+        <div class="panel panel-info">
+            <div class="panel-heading" ng-click="infoBasicaIsCollapsed = !infoBasicaIsCollapsed">
+                Información básica
+            </div>
+            <div collapse="infoBasicaIsCollapsed">
+              <div class="panel-body">
+
+                   <div data-ng-bind-html="auditoriaStatusHTML"></div>
+                   <div class="row">
+
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                        <label>Id auditoría</label>
+                        <label class="form-control">{{auditoria.id}}</label>
+                        <p class="help-block"></p>
+                      </div>
+
+                      <div class="form-group">
+                        <label>Razón social</label>
+                        <label class="form-control">{{auditoria.productor.razonSocial}}</label>
+                        <p class="help-block"></p>
+                      </div>
+
+                        <div class="form-group">
+                          <label>Precio</label>
+                          <label class="form-control">{{auditoria.precio}}</label>
+                          <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                         <label>Notas</label>
+                         <textarea class="form-control" readonly rows="3">{{auditoria.notas}}</textarea>
+                        </div>
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+
+                       <div class="form-group">
+                          <label>Matrícula del productor</label>
+                          <label class="form-control">{{auditoria.matricula}}</label>
+                          <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Dirección</label>
+                          <label class="form-control">{{auditoria.productor.direccion}}</label>
+                          <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Tipo de auditoría</label>
+                          <select class="form-control"  ng-model="auditoria.tipo" disabled>
+                              <option value="">Seleccione tipo de auditoria</option>
+                              <option value="0">Sin registro</option>
+                              <option value="1">Con registro</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Mecanismo de contacto</label>
+                          <select class="form-control"  ng-model="auditoria.mecanismoContacto" disabled>
+                              <option value="">Seleccione mecanismo de contacto</option>
+                              <option value="1">Llamada telefonica</option>
+                              <option value="2">Email</option>
+                              <option value="3">Web</option>
+                              <option value="4">Visita a la oficina</option>
+                          </select>
+                        </div>                            
+                    </div>
+                  </div>
+             </div>
+           </div>
+        </div>
+
+
+          <div class="panel panel-info" ng-show = "auditoria.motivo_cancelacion">
+            <div class="panel-heading">
+                Auditoría cancelada
+            </div>
+            <div class="panel-body">
+
+                   <div class="row">
+
+                    <div class="col-lg-12">
+
+                      <div class="form-group">
+                            <label>Motivo</label>
+                            <textarea class="form-control" readonly rows="3">{{auditoria.motivo_cancelacion}}</textarea>
+                        </div>
+                            
+                    </div>
+
+                  </div>
+             </div>
+          </div>
+
+        <div class="panel panel-info" ng-show = "auditoria.relevamiento === null">
+          <div class="panel-body">
+            Sin relevamiento telefónico
+          </div>
+        </div>
+
+        <div class="panel panel-info" ng-show = "auditoria.relevamiento !== null" >
+            <div class="panel-heading" ng-click="relevamientoIsCollapsed = !relevamientoIsCollapsed">
+                Relevamiento telefónico
+            </div>
+            <div collapse="relevamientoIsCollapsed">
+            <div class="panel-body" ng-controller="RelevamientoCtrl as rc" >
+              <div class="row">
+                    <div class="col-lg-12">
+
+                      <form name="relevamiento1" novalidate>
+                        <div class="panel box box-primary">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="generalIsCollapsed = !generalIsCollapsed">
+                                General
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="generalIsCollapsed">
+                            <div class="box-body">
+                              <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group">
+                                  <label>Motivo por el cual se realiza la auditoria</label>
+                                  <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.motivo"></textarea>
+                                </div>
+                              </div>
+                              </div>
+                            
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Contacto de visita</label>
+                                  <input class="form-control" ng-model="relevamientoNuevo.contactoVisita">
+                                  <p class="help-block"></p>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="form-group" ng-class="{ 'has-error' : relevamiento1.remision.$invalid }">
+                                  <label>Remisión diaria promedio</label>
+                                  <input class="form-control" name = "remision" ng-init="cargarUltimaRemision()" type="number" ng-model="relevamientoNuevo.remision">
+                                  <p ng-show="relevamiento1.remision.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Frecuencia de recolección en zafra</label>
+                                  <select class="form-control" ng-model="relevamientoNuevo.frecuenciaRecoleccion">
+                                      <option value="">Seleccione frecuencia de recolección</option>
+                                      <option>Una vez al día</option>
+                                      <option>Dos veces al día</option>
+                                      <option>Cada 48 horas</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label>Horario aproximado de recolección</label>
+                                    <!-- <input class="form-control" ng-model="relevamientoNuevo.horarios">
+                                    <p class="help-block"></p> -->
+
+                                      <div ng-controller="TimepickerDemoCtrl">
+                                        <timepicker ng-model="horarioRecoleccion"  ng-change="horarioRecoleccionChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+<!--                                         <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+ -->                                      </div>
+
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : relevamiento1.cantBombas.$invalid }">
+                                  <label>Cantidad de bombas de agua totales</label>
+                                  <input class="form-control" name="cantBombas" type="number" ng-model="relevamientoNuevo.cantBombas">
+                                  <p ng-show="relevamiento1.cantBombas.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group" ng-class="{ 'has-error' : relevamiento1.vacasMax.$invalid }">
+                                  <label> Número maximo de vacas en ordeñe </label>
+                                  <input class="form-control" name = "vacasMax" type="number"ng-model="relevamientoNuevo.vacasMax">
+                                  <p class="help-block"></p>
+                                  <p ng-show="relevamiento1.vacasMax.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                                <div class="form-group"  ng-class="{ 'has-error' : relevamiento1.proyeccion.$invalid }">
+                                  <label>Proyección de vacas en ordeñe a un año</label>
+                                  <input class="form-control" name = "proyeccion" type="number"ng-model="relevamientoNuevo.proyeccion">
+                                  <p class="help-block"></p>
+                                  <p ng-show="relevamiento1.proyeccion.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                                <div class="form-group" >
+                                    <label>Instalador recomendado</label>
+                                    <input class="form-control" ng-model="relevamientoNuevo.instalador">
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                              <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="checkbox">
+                                     <label><input type="checkbox" value="" ng-init="relevamientoNuevo.llegaFactura=false" 
+                                        ng-model="relevamientoNuevo.llegaFactura">Llega factura de UTE</label>
+                                  </div>
+                               </div>
+                               </div>
+                               
+                              <div class="row">    
+                               <div class="col-lg-6">
+                                   <div class="form-group" ng-show = "!relevamientoNuevo.llegaFactura">
+                                        <label>A dónde llega?</label>
+                                        <input class="form-control" ng-model="relevamientoNuevo.dondeFactura">
+                                   </div>
+                               </div>
+                              </div>
+
+
+                              <div class="row">
+                               <div class="col-lg-6">
+                                   <div class="form-group">
+                                       <label>Auditor responsable</label>
+                                      <select class="form-control" ng-model="auditores.selectedOption">
+                                        <option value="" >Seleccione auditor</option>
+                                        <option ng-repeat="auditor in auditores" value="{{auditor.username}}" >{{auditor.username}}</option>
+                                    </select>
+                                  </div>
+                               </div>
+                              </div>
+
+                                  
+                              <div class="row" ng-controller='DatepickerDemoCtrl'>
+                                <div class="col-md-12">
+                                <div class="box box-solid">
+                                  <div class="box-header with-border">
+                                    <h3 class="box-title">Rango de fechas para visita de auditor</h3>
+                                  </div>
+                                  <div class="box-body">
+                                <div class="col-lg-6">
+                                  <label>Fecha desde</label>
+                                    <p class="input-group">
+                                      <input ng-model="formData.dueDate" type="text" id="visitaDesde" name="visitaDesde" show-weeks="false" show-button-bar= "false" language= "es" class="form-control" min-date="minDate" datepicker-popup="dd-MM-yyyy" datepicker-append-to-body="true" is-open="data.isOpen" ng-click="data.isOpen = !data.isOpen" ng-change="visitaDesdeChanged()">
+                                      <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default" ng-click="data.isOpen = !data.isOpen;$event.stopPropagation();"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </p>
+                                </div>  
+                              <div class="col-lg-6">
+                                <label>Fecha hasta</label>
+                                  <p class="input-group">
+                                      <input ng-model="relevamientoNuevo.visitaHasta" type="text" id="visitaHasta" name="visitaHasta" show-weeks="false" show-button-bar= "false" language= "es" class="form-control" min-date="formData.dueDate" datepicker-popup="dd-MM-yyyy" datepicker-append-to-body="true"
+                                            is-open="data1.isOpen" ng-click="data1.isOpen = !data1.isOpen" ng-change="visitaHastaChanged()">
+                                      <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default" ng-click="data1.isOpen = !data1.isOpen;$event.stopPropagation();"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                 </p>
+                                 </div> 
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="panel box box-info">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="tanquesIsCollapsed = !tanquesIsCollapsed">
+                             Tanques de frío
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="tanquesIsCollapsed">
+                        <div class="box-body">
+                          <div class="dataTable_wrapper">
+                              <table class="table table-striped table-bordered table-hover" id="tabla_tanques">
+                                  <thead>
+                                      <tr>
+                                          <th>Marca</th>
+                                          <th>Clase</th>
+                                          <th>Capacidad</th>
+                                          <th>Antigüedad</th>
+                                          <th>Accion</th>
+                                      </tr>
+                                  </thead>
+                                  
+                                  <tbody ng-repeat="tanque in nuevoRelevamientoTanques">
+                                      <tr>
+                                         <td ng-if="tanque.marca !== 'Otro' ">{{tanque.marca}}</td>
+                                         <td ng-if="tanque.marca == 'Otro' ">{{tanque.otraMarca}}</td>
+                                          <td>{{tanque.clase}}</td>
+                                          <td>{{tanque.capacidad}}</td> 
+                                          <td>{{tanque.antiguedad}}</td> 
+                                          <td>
+                                            <a ng-click="modificarTanqueNuevoClicked(tanque,$index)">
+                                              Editar
+                                            </a>
+                                             -  
+                                            <a ng-click="borrarTanqueNuevoClicked(tanque,$index)">
+                                              Borrar
+                                            </a>
+                                           </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <button class="btn btn-info" ng-click="agregarTanqueClicked()">Agregar</button>
+                        </div>      
+                          
+                      </div>
+                    </div>
+                    <!-- FIN TANQUES -->
+                  </div>
+                  <div class="col-lg-12">
+                    <!-- Panel Calentamiento (inicio) -->
+                    <div class="panel box box-info">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="calentamientoIsCollapsed = !calentamientoIsCollapsed">
+                            Mecanismo de calentamiento de agua
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="calentamientoIsCollapsed">
+                          <div class="box-body">
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.recuperdadorCalor=false" 
+                                                ng-model="relevamientoNuevo.mecanismoCalentarAgua.recuperdadorCalor">Recuperador de calor</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.colectorSolar=false" 
+                                                ng-model="relevamientoNuevo.mecanismoCalentarAgua.colectorSolar">Colector solar</label>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.termotanqueElectrico=false" 
+                                      ng-model="relevamientoNuevo.mecanismoCalentarAgua.termotanqueElectrico">Termotanque eléctrico</label>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.calentadorGas=false" 
+                                      ng-model="relevamientoNuevo.mecanismoCalentarAgua.calentadorGas">Calentador a gas</label>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.bombaCalor=false" 
+                                      ng-model="relevamientoNuevo.mecanismoCalentarAgua.bombaCalor">Bomba de calor</label>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.lena=false" 
+                                      ng-model="relevamientoNuevo.mecanismoCalentarAgua.lena">Leña</label>
+                              </div>
+                            </div>
+
+                            <div class="col-lg-3">   
+                              <div class="checkbox">
+                                <label><input type="checkbox" value=""  ng-init="relevamientoNuevo.mecanismoCalentarAgua.usaTimer=false" 
+                                                ng-model="relevamientoNuevo.mecanismoCalentarAgua.usaTimer">Usa timer</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-12">
+                              <div class="form-group">
+                                  <label>Observaciones</label>
+                                  <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.mecanismoCalentarAgua.observaciones"></textarea>
+                              </div>
+                            </div>
+                          </div>  
+                      </div>
+                    </div>
+                    <!-- Panel Calentamiento (fin) -->
+
+                  </div>
+                </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                    <!-- Panel Maquina ordeñe(inicio) -->
+                    <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="maquinaIsCollapsed = !maquinaIsCollapsed">
+                            Maquina de ordeñe
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="maquinaIsCollapsed">
+                          <div class="box-body">
+                            <form name="maquinaForm" novalidate>
+                             <div class="row">
+                              <div class="col-lg-6">          
+                                <div class="form-group" ng-class="{ 'has-error' : maquinaForm.cantBombas.$invalid }">
+                                  <label>Cantidad de bombas</label>
+                                  <input class="form-control" name="cantBombas" type="number" ng-model="relevamientoNuevo.maquina.cantBombas">
+                                  <p class="help-block"></p>
+                                  <p ng-show="maquinaForm.cantBombas.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+                              <div class="col-lg-6"> 
+                                <div class="form-group" ng-class="{ 'has-error' : maquinaForm.numeroOrganos.$invalid }">
+                                  <label>Número de organos</label>
+                                  <input class="form-control" name="numeroOrganos" type="number" ng-model="relevamientoNuevo.maquina.numeroOrganos">
+                                  <p class="help-block"></p>
+                                  <p ng-show="maquinaForm.numeroOrganos.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-6"> 
+                                <div class="form-group" ng-class="{ 'has-error' : maquinaForm.potenciaVacio.$invalid }">
+                                  <label>Potencia total de vacío (kW) </label>
+                                  <input class="form-control" name="potenciaVacio" type="number" ng-model="relevamientoNuevo.maquina.potenciaVacio">
+                                  <p class="help-block"></p>
+                                  <p ng-show="maquinaForm.potenciaVacio.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+                              <div class="col-lg-6"> 
+                                <div class="form-group">
+                                  <label></label>
+                                  <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" value="" ng-init="relevamientoNuevo.maquina.tieneVSD=false" ng-model="relevamientoNuevo.maquina.tieneVSD">Tiene VSD
+                                    <p class="help-block"></p>
+                                    </label>
+                                  </div>
+                                </div>                               
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-6"> 
+                                <div class="form-group">
+                                  <label>Primer horario de ordeñe</label>
+                                  
+                                  <div ng-controller="TimepickerDemoCtrl">
+                                    <timepicker ng-model="primerOrdene"  ng-change="primerOrdeneChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+                                  </div>
+
+                                </div>
+                              </div>
+                              <div class="col-lg-6"> 
+                                <div class="form-group">
+                                  <label>Segundo horario de ordeñe</label>
+                                  <div ng-controller="TimepickerDemoCtrl">
+                                    <timepicker ng-model="segundoOrdene"  ng-change="segundoOrdeneChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+                                  </div>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-6"> 
+                                <div class="form-group">
+                                  <label>Duración de ordeñe</label>
+                                  <input class="form-control" ng-model="relevamientoNuevo.maquina.duracion">
+                                  <p class="help-block"></p>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-12"> 
+                                <div class="form-group">
+                                  <label>Observaciones</label>
+                                  <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.maquina.observaciones" ></textarea>
+                                </div>
+                              </div>
+                              </div>
+                            </form>
+                          </div>  
+                      </div>
+                    </div>
+                     <!-- Panel Maquina ordeñe (fin) -->
+                  </div>
+                </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                    <!-- Panel Electrica (inicio) -->
+                    <div class="panel box box-info">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="electricaIsCollapsed = !electricaIsCollapsed">
+                            Eléctrica
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="electricaIsCollapsed">
+                          <div class="box-body">
+                            <form name="electricaForm" novalidate>
+                              <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Tipo de suministro</label>
+                                  <select class="form-control" ng-model="relevamientoNuevo.electrica.tipo">
+                                      <option value="">Seleccione tipo</option>
+                                      <option value="Monofasico monofilar">Monofásico monofilar</option>
+                                      <option value="Monofasico bifilar">Monofásico bifilar</option>
+                                      <option value="Trifasico">Trifásico</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Tensión de suministro</label>
+                                  <select class="form-control" ng-model="relevamientoNuevo.electrica.tensionSuministro">
+                                      <option value="">Seleccione tensión de suministro</option>
+                                      <option value="230V">230V</option>
+                                      <option value="400V">400V</option>
+                                  </select>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6">
+                                  <div class="form-group" ng-class="{ 'has-error' : electricaForm.numCuenta.$invalid }">
+                                    <label>Número de cuenta</label>
+                                    <input class="form-control" name="numCuenta" type="text" ng-pattern="/[0-9][0-9]{9}$/" minlength = "10" maxlength = "10" ng-model="relevamientoNuevo.electrica.numCuenta">
+                                    <p ng-show="electricaForm.numCuenta.$invalid" class="help-block">Debe ingresar un número de 10 digitos </p>
+                                  </div>
+                                </div>
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Calidad de energía</label>
+                                  <select class="form-control" ng-model="relevamientoNuevo.electrica.calidadEnergia">
+                                      <option value="">Seleccione calidad de energía</option>
+                                      <option value="Buena">Buena</option>
+                                      <option value="Cortes frecuentes">Cortes frecuentes</option>
+                                      <option value="Baja tension frecuente">Baja tensión frecuente</option>
+                                  </select>
+                                </div>
+                              </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-lg-6">
+                                  <div class="checkbox" n ng-show = "relevamientoNuevo.electrica.numCuenta">
+                                    <label></label>
+                                    <label><input type="checkbox" value="" ng-init="relevamientoNuevo.electrica.datosSolicitados=false" 
+                                            ng-model="relevamientoNuevo.electrica.datosSolicitados">Datos solicitados a UTE</label>
+                                  </div>  
+                                </div>
+                              </div>
+                              
+                              <div class="row">
+                             <div class="col-lg-6">
+                                <div class="checkbox">
+                                  <label></label>
+                                  <label><input type="checkbox" value="" ng-init="relevamientoNuevo.electrica.medidorExclusivo=true" 
+                                          ng-model="relevamientoNuevo.electrica.medidorExclusivo">Medidor exclusivo para el tambo</label>
+                                </div>
+                           
+                                <div class="form-group col-lg-offset-1" ng-show = "!relevamientoNuevo.electrica.medidorExclusivo" 
+                                              ng-class="{ 'has-error' : electricaForm.cantCasas.$invalid }">
+                                  <label>Cantidad de casas que alimenta</label>
+                                  <input class="form-control" name="cantCasas" type="number" ng-model="relevamientoNuevo.electrica.cantCasas">
+                                  <p ng-show="electricaForm.cantCasas.$invalid" class="help-block">Debe ingresar un número </p>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-12" style="padding-top: 5px;">
+                                <div class="form-group">
+                                    <label>Observaciones</label>
+                                    <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.electrica.observaciones"></textarea>
+                                </div>
+                              </div>
+                              </div>
+                            </form>
+                          </div>  
+                      </div>  
+                    </div>
+                    <!-- Panel Electrica (fin) -->                                
+                  </div>
+                </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                    <!-- Panel Intercambiado (inicio) -->
+                    <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="intercambiadorIsCollapsed = !intercambiadorIsCollapsed">
+                            Intercambiador de placas
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="intercambiadorIsCollapsed">
+                          <div class="box-body">
+                            <div class="col-lg-6">
+                              <div class="checkbox">
+                                <label><input type="checkbox" value="" ng-init="relevamientoNuevo.intercambiador.usaIntercambiador=false"
+                                          ng-model="relevamientoNuevo.intercambiador.usaIntercambiador">Tiene intercambiador de placas</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-12">
+                              <div class="form-group">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.intercambiador.observaciones"></textarea>
+                              </div>
+                            </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Panel Intercambiador(fin) -->
+                </div>
+              <div class="row">
+                  <div class="col-lg-12">
+                    <!-- Panel Riego (inicio) -->
+                    <div class="panel box box-info">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a ng-click="riegoIsCollapsed = !riegoIsCollapsed">
+                            Riego
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="riegoIsCollapsed">
+                          <div class="box-body">
+                            <form name="riegoForm" novalidate>
+                              <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                  <div class="checkbox">
+                                    <label><input type="checkbox" value="" ng-init="relevamientoNuevo.riego.tieneRiego=false"
+                                          ng-model="relevamientoNuevo.riego.tieneRiego">Tiene riego</label>
+                                  </div>
+                                </div>
+                                <div class="col-lg-12">
+                                  <div class="form-group" ng-show="relevamientoNuevo.riego.tieneRiego" 
+                                                          ng-class="{ 'has-error' : riegoForm.cantBombasRiego.$invalid }">
+                                        <label>Cantidad de bombas de agua dedicadas a riego</label>
+                                        <input class="form-control" name="cantBombasRiego" type="number" ng-model="relevamientoNuevo.riego.cantBombasRiego">
+                                        <p ng-show="riegoForm.cantBombasRiego.$invalid" class="help-block">Debe ingresar un número </p>
+
+                                  </div>
+                                </div>
+                                <div class="col-lg-12">
+                                  <div class="form-group" ng-show="relevamientoNuevo.riego.tieneRiego">
+                                    <div class="checkbox">
+                                      <label><input type="checkbox" value="" ng-init="relevamientoNuevo.riego.medidorAparte=false"
+                                            ng-model="relevamientoNuevo.riego.medidorAparte"> Medidor Aparte </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-12">
+                                  <div class="form-group" ng-show="relevamientoNuevo.riego.medidorAparte" 
+                                                              ng-class="{ 'has-error' : riegoForm.numCuenta.$invalid }">
+                                        <label>Número de cuenta</label>
+                                        <input class="form-control" name="numCuenta" type="number" ng-model="relevamientoNuevo.riego.numCuenta">
+                                        <p ng-show="riegoForm.numCuenta.$invalid" class="help-block">Debe ingresar un número </p>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-12">
+                                <div class="form-group" ng-show="relevamientoNuevo.riego.tieneRiego">
+                                    <label>Observaciones</label>
+                                    <textarea class="form-control" rows="3" ng-model="relevamientoNuevo.riego.observaciones"></textarea>
+                                </div>
+                              </div>
+                            </form>
+                          </div>  
+                      </div>
+                      <!-- Panel Riego (fin) -->
+                    </div>
+                  </div>
+                </div>
+              <div class="row"> <!-- , minDuration:2000 -->
+                  <div cg-busy="{promise:myPromise,message:'Espere',templateUrl:'../views/busyTemplate.html'}"></div>
+                  <div class="col-lg-12">
+                    <div class="col-lg-10" ng-show="relevamientoNuevo.aceptacionAuditoria == 'Si'">
+                      
+                      <button ng-show="checkRol(1) && bConnected" class="btn btn-primary" ng-disabled="riegoForm.$invalid || electricaForm.$invalid || relevamiento1.$invalid || 
+                                maquinaForm.$invalid" ng-click="modificarRelevamiento()">Guardar</button>
+                        
+                      <!-- <button class="btn btn-info" ng-click="goto('relevamiento.print')">Imprimir</button> -->
+                                
+                                 <p ng-show="riegoForm.$invalid || electricaForm.$invalid || relevamiento1.$invalid || 
+                                relevamiento2.$invalid || maquinaForm.$invalid" class="help-block"  style="color:red;"> Corrija formulario </p>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+    <div class="panel panel-info" ng-show = "auditoria.relevamiento !== null && auditoria.relevamientoAuditoria === null">
+        <div class="panel-body">
+          La auditoría no ha sido realizada aún.
+        </div>
+    </div>
+
+  <div class="panel panel-info" ng-show = "auditoria.relevamientoAuditoria !== null" >
+    <div class="panel-heading" ng-click="relevamientoAuditoriaIsCollapsed = !relevamientoAuditoriaIsCollapsed">
+      Auditoría realizada
+    </div>
+    <div collapse="relevamientoAuditoriaIsCollapsed">
+      <div class="panel-body" ng-controller="RealizarAuditoriaCtrl as rc">
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <form name="relevamiento1" novalidate>
+                          <div class="panel box box-primary">
+                             <div class="box-header with-border">
+                                <h4 class="box-title">
+                                   <a ng-click="generalIsCollapsed = !generalIsCollapsed">
+                                   Datos generales
+                                   </a>
+                                </h4>
+                             </div>
+                             <div collapse="generalIsCollapsed">
+                                <div class="box-body">
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Nombre del entrevistado</label>
+                                            <input class="form-control" ng-model="relevamientoNuevo.nombreEntrevistado">
+                                            <p class="help-block"></p>
+                                         </div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Teléfono de contacto del entrevistado</label>
+                                            <input class="form-control" name = "telefonoEntrevistado" ng-model="relevamientoNuevo.telefonoEntrevistado">
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamientoNuevo.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </form>
+                     
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="suministroElectricoIsCollapsed = !suministroElectricoIsCollapsed">
+                                  Suministro eléctrico
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="suministroElectricoIsCollapsed">
+                             <div class="box-body">
+                                <form name="suministroForm" novalidate>
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <div class="box box-solid">
+                                        <div class="box-header with-border">
+                                          <h3 class="box-title">Datos del suministro principal</h3>
+                                        </div>
+                                        <div class="box-body">
+                                          <div class="col-lg-4" ng-class="{ 'has-error': suministroForm.idUTE.$invalid }">
+                                           <label>Número de cuenta (UTE)</label>
+                                           <input class="form-control" name="idUTE" type="text" ng-pattern="/[0-9][0-9]{9}$/" minlength = "10" maxlength = "10" ng-model="relevamiento.suministroElectrico.idUTE">
+                                           <p class="help-block"></p>
+                                           <p ng-show="suministroForm.idUTE.$invalid" class="help-block">Debe ingresar un número de 10 digitos </p>
+                                          </div>                                      
+                                          <div class="col-lg-4" ng-class="{ 'has-error': suministroForm.medidor.$invalid }">
+                                             <label>Número de medidor</label>
+                                             <input class="form-control" name="medidor" type="number" ng-model="relevamiento.suministroElectrico.medidor">
+                                             <p class="help-block"></p>
+                                             <p ng-show="suministroForm.medidor.$invalid" class="help-block">Debe ingresar un número </p>
+                                          </div>
+                                          <div class="col-lg-4">
+                                             <div class="form-group">
+                                                <label>Potencia registrada</label>
+                                                <input class="form-control" ng-model="relevamiento.suministroElectrico.potencia">
+                                             </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="relevamiento.suministroElectrico.incluyeCasaBoolean=false" 
+                                               ng-model="relevamiento.suministroElectrico.incluyeCasaBoolean">Suministro eléctrico incluye casa</label>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': suministroForm.cantPersonas.$invalid}" ng-show = "relevamiento.suministroElectrico.incluyeCasaBoolean">
+                                         <label>Cantidad de personas que habitan la casa</label>
+                                         <input class="form-control" name="cantPersonas" type="number" ng-model="relevamiento.suministroElectrico.cantPersonas">
+                                         <p class="help-block"></p>
+                                         <p ng-show="suministroForm.cantPersonas.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                   </div>
+                                 </br>
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="panel box box-primary">
+                                            <div class="box-header with-border">
+                                               <h4 class="box-title">
+                                                  <a ng-click="suministrosIsCollapsed = !suministrosIsCollapsed">
+                                                  Otros suministros
+                                                  </a>
+                                               </h4>
+                                            </div>
+                                            <div collapse="suministrosIsCollapsed">
+                                               <div class="box-body table-responsive no-padding">
+                                                  <table class="table table-hover">
+                                                     <tr>
+                                                        <th>Número de cuenta (UTE)</th>
+                                                        <th>Descripción</th>
+                                                        <th>Cantidad medidores</th>
+                                                        <th>Acción</th>
+                                                     </tr>
+                                                     <tr ng-repeat="suministro in relevamiento.suministroElectrico.suministros">
+                                                        <td>{{suministro.idUTE}}</td>
+                                                        <td>{{suministro.descripcion}}</td>
+                                                        <td>{{suministro.cantMedidores}}</td>
+                                                        <td>
+                                                           <a ng-click="modificarSuministroClicked(suministro,$index)">
+                                                           Editar
+                                                           </a>
+                                                           -  
+                                                           <a ng-click="borrarSuministroClicked(suministro,$index)">
+                                                           Borrar
+                                                           </a>
+                                                        </td>
+                                                     </tr>
+                                                  </table>
+                                                  <div class="box-footer">
+                                                     <button class="btn btn-info" ng-click="agregarSuministroClicked()">Agregar</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios del suministro eléctrico</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamiento.suministroElectrico.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div> 
+                                    <div> 
+                                  </div>                                            
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="instalacionElectricaIsCollapsed = !instalacionElectricaIsCollapsed">
+                                Instalación eléctrica
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="instalacionElectricaIsCollapsed">
+                             <div class="box-body">
+                                <form name="instalacionElectricaForm" novalidate>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Estado visual de las instalaciones</label>
+                                            <select name="estado" class="form-control" ng-model="relevamiento.instalacionElectrica.estado">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Deficiente">Deficiente</option>
+                                               <option value = "Regular">Regular</option>
+                                               <option value = "Bueno">Bueno</option>
+                                            </select>
+                                         </div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Llave diferencial</label>
+                                            <select name="llave" class="form-control" ng-model="relevamiento.instalacionElectrica.llave">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Ninguno de los circuitos protegidos">Ninguno de los circuitos protegidos</option>
+                                               <option value = "Algunos circuitos protegidos">Algunos circuitos protegidos</option>
+                                               <option value = "Todos los circuitos protegidos">Todos los circuitos protegidos</option>
+                                            </select>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                    <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Tipo de conexión</label>
+                                            <select name="tablero" class="form-control" ng-model="relevamiento.instalacionElectrica.tipoConexion">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "MRT (1 hilo)">MRT (1 hilo)</option>
+                                               <option value = "Bifasica (2 hilos)">Bifásica (2 hilos)</option>
+                                               <option value = "Trifasica (2 hilos)">Trifásica (2 hilos)</option>
+                                               <option value = "Trifasica 230 V (3 hilos)">Trifásica 230 V (3 hilos)</option>
+                                               <option value = "Trifasica 400V (4 hilos)">Trifásica 400V (4 hilos)</option>
+                                            </select>
+                                         </div>
+                                      </div>
+                                      
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Tablero</label>
+                                            <select name="tablero" class="form-control" ng-model="relevamiento.instalacionElectrica.tablero">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Inexistente">Inexistente</option>
+                                               <option value = "Varios">Varios</option>
+                                               <option value = "Centralizado">Centralizado</option>
+                                               <option value = "Centralizado y estanco">Centralizado y estanco</option>
+                                            </select>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                    <div class="col-lg-6">
+                                         <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="relevamiento.instalacionElectrica.conexionTierraBoolean=false" 
+                                               ng-model="relevamiento.instalacionElectrica.conexionTierraBoolean">Tiene conexión a tierra</label>
+                                         </div>
+                                      </div>
+
+                                      <div class="col-lg-6" ng-show = "relevamiento.instalacionElectrica.conexionTierraBoolean">
+                                         <div class="form-group">
+                                            <label>Estado de la conexión a tierra</label>
+                                            <select name="estadoTierra" class="form-control" ng-model="relevamiento.instalacionElectrica.estadoTierra">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Deficiente">Deficiente</option>
+                                               <option value = "Regular">Regular</option>
+                                               <option value = "Bueno">Bueno</option>
+                                            </select>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios sobre la instalación eléctrica</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamiento.instalacionElectrica.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="orderneIsCollapsed = !orderneIsCollapsed">
+                                Ordeñe
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="orderneIsCollapsed">
+                             <div class="box-body">
+                                <form name="ordeneForm" novalidate>
+                                   <div class="row">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': ordeneForm.cantVacas.$invalid }">
+                                         <label>Número máximo de vacas en ordeñe</label>
+                                         <input class="form-control"  name="cantVacas" type="number" ng-model="relevamientoNuevo.ordene.cantVacas">
+                                         <p class="help-block"></p>
+                                         <p ng-show="ordeneForm.cantVacas.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                      <div class="col-lg-6" ng-class="{ 'has-error': ordeneForm.proyVacas1.$invalid }">
+                                         <label>Proyeccion pico de vacas en ordeñe a 1 año</label>
+                                         <input class="form-control"  name="proyVacas1" type="number" ng-model="relevamientoNuevo.ordene.proyVacas1">
+                                         <p class="help-block"></p>
+                                         <p ng-show="ordeneForm.proyVacas1.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': ordeneForm.proyVacas2.$invalid }">
+                                         <label>Proyeccion pico de vacas en ordeñe a 2 años</label>
+                                         <input class="form-control" name="proyVacas2" type="number" ng-model="relevamientoNuevo.ordene.proyVacas2">
+                                         <p class="help-block"></p>
+                                         <p ng-show="ordeneForm.proyVacas2.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                   <div class="col-lg-12">
+                                     <div class="box">
+                                        <div class="box-header" style="background-color:#e2f4f9">
+                                          <h3 class="box-title" >Horario del ordeñe</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+                                          <div class="tableScroll">
+                                          <table class="table table-bordered" style="text-align:center">
+                                            <tr>
+                                              <th></th>
+                                              <th colspan=2  style="text-align:center; background-color:#e6e9ec">Horario habitual</th>
+                                              <th colspan=2  style="text-align:center; background-color:#eef4f9">Horario verano</th>
+                                            </tr>
+                                            <tr>
+                                              <th></th>
+                                              <th style="min-width:140px;text-align:center">Primer ordeñe</th>
+                                              <th style="min-width:140px;text-align:center">Segundo ordeñe</th>
+                                              <th style="min-width:140px;text-align:center">Primer ordeñe</th>
+                                              <th style="min-width:140px;text-align:center">Segundo ordeñe</th>
+                                            </tr>
+                                            <tr>
+                                              <th style="vertical-align:middle;text-align:center">Hora de comienzo</th>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"> <timepicker ng-model="relevamientoNuevo.ordene.primerOrdeneHabitualComienzo"  ng-init="relevamientoNuevo.ordene.primerOrdeneHabitualComienzo=dia" ng-change="primerOrdeneHabitualComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoOrdeneHabitualComienzo"  ng-init="relevamientoNuevo.ordene.segundoOrdeneHabitualComienzo=dia" ng-change="segundoOrdeneHabitualComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerOrdeneVeranoComienzo"  ng-init="relevamientoNuevo.ordene.primerOrdeneVeranoComienzo=dia" ng-change="primerOrdeneVeranoComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoOrdeneVeranoComienzo"   ng-init="relevamientoNuevo.ordene.segundoOrdeneVeranoComienzo=dia" ng-change="segundoOrdeneVeranoComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                            </tr>
+                                            <tr>
+                                              <th style="vertical-align:middle;text-align:center">Hora de finalización</th>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerOrdeneHabitualFin" ng-init="relevamientoNuevo.ordene.primerOrdeneHabitualFin=dia" ng-change="primerOrdeneHabitualFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoOrdeneHabitualFin" ng-init="relevamientoNuevo.ordene.segundoOrdeneHabitualFin=dia" ng-change="segundoOrdeneHabitualFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerOrdeneVeranoFin" ng-init="relevamientoNuevo.ordene.primerOrdeneVeranoFin=dia" ng-change="primerOrdeneVeranoFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoOrdeneVeranoFin" ng-init="relevamientoNuevo.ordene.segundoOrdeneVeranoFin=dia" ng-change="segundoOrdeneVeranoFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                            </tr>
+                                            
+                                          </table>
+                                          </div>
+                                        </div><!-- /.box-body -->
+                                      </div><!-- /.box -->
+                                    </div>
+                                   </div>
+                                   <div class="row">
+                                   <div class="col-lg-7">
+                                     <div class="box">
+                                        <div class="box-header" style="background-color:#e2f4f9">
+                                          <h3 class="box-title">Horario de lavado de máquina</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+                                          <table class="table table-bordered" style="text-align:center">
+                                            <tr>
+                                              <th></th>
+                                              <th style="min-width:140px;text-align:center">Primer lavado</th>
+                                              <th style="min-width:140px;text-align:center">Segundo lavado</th>
+                                            </tr>
+                                            <tr>
+                                              <th style="vertical-align:middle;text-align:center">Hora de comienzo</th>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerLavadoComienzo" ng-init="relevamientoNuevo.ordene.primerLavadoComienzo=dia" ng-change="primerLavadoComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoLavadoComienzo" ng-init="relevamientoNuevo.ordene.segundoLavadoComienzo=dia" ng-change="segundoLavadoComienzoChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                               </tr>
+                                            <tr>
+                                              <th style="vertical-align:middle;text-align:center">Hora de finalización</th>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerLavadoFin" ng-init="relevamientoNuevo.ordene.primerLavadoFin=dia" ng-change="primerLavadoFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-4 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoLavadoFin" ng-init="relevamientoNuevo.ordene.segundoLavadoFin=dia" ng-change="segundoLavadoFinChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                            </tr>
+                                            
+                                          </table>
+                                        </div><!-- /.box-body -->
+                                      </div><!-- /.box -->
+                                    </div>
+                                   <!-- </div>
+                                   <div class="row"> -->
+                                   <div class="col-lg-5">
+                                     <div class="box">
+                                        <div class="box-header" style="background-color:#e2f4f9">
+                                          <h3 class="box-title">Horario del retiro</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+                                          <table class="table table-bordered" style="text-align:center">
+                                            <tr>
+                                              <th></th>
+                                              <th style="min-width:140px;text-align:center">Primero</th>
+                                              <th style="min-width:140px;text-align:center">Segundo</th>
+                                            </tr>
+                                            <tr>
+                                              <th style="vertical-align:middle;text-align:center">Hora de retiro</th>
+                                              <td style="text-align:center"><div class="row col-lg-offset-2 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.primerRetiro" ng-init="relevamientoNuevo.ordene.primerRetiro=dia"  ng-change="primerRetiroChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                              <td style="text-align:center"><div class="row col-lg-offset-2 col-md-offset-3 col-sm-offset-1 col-xs-offset-1"><timepicker ng-model="relevamientoNuevo.ordene.segundoRetiro" ng-init="relevamientoNuevo.ordene.segundoRetiro=dia"  ng-change="segundoRetiroChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker></div></td>
+                                            </tr>
+                                            
+                                          </table>
+                                        </div><!-- /.box-body -->
+                                      </div><!-- /.box -->
+                                    </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios sobre el ordeñe </label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamiento.ordene.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="maquinaOrdeneIsCollapsed = !maquinaOrdeneIsCollapsed">
+                                Máquina de ordeñe
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="maquinaOrdeneIsCollapsed">
+                             <div class="box-body">
+                                <form name="maquinaOrdeneForm" novalidate>
+                                   <div class="row">
+                                      <div class="form-group col-lg-6">
+                                          <label>Marca</label>
+                                          <select name="marca" class="form-control" ng-model="relevamiento.maquinaOrdene.marca">
+                                            <option value = "">Seleccione una opción</option>
+                                            <option value = "Alfa Laval">Alfa Laval</option>
+                                            <option value = "Bosio">Bosio</option>
+                                            <option value = "Boumatic">Boumatic</option>
+                                            <option value = "De Laval">De Laval</option>
+                                            <option value = "Dinamica">Dinamica</option>
+                                            <option value = "El Trebol">El Trebol</option>
+                                            <option value = "Fullwood">Fullwood</option>
+                                            <option value = "Gea">Gea</option>
+                                            <option value = "Injertada">Injertada</option>
+                                            <option value = "Interplus">Interplus</option>
+                                            <option value = "Lely">Lely</option>
+                                            <option value = "Manovac">Manovac</option>
+                                            <option value = "Masport">Masport</option>
+                                            <option value = "Meriel">Meriel</option>
+                                            <option value = "Miele">Miele</option>
+                                            <option value = "Rodeg">Rodeg</option>
+                                            <option value = "Ruakura">Ruakura</option>
+                                            <option value = "Sac">Sac</option>
+                                            <option value = "Stranco">Stranco</option>
+                                            <option value = "Surge">Surge</option>
+                                            <option value = "Urumilk">Urumilk</option>
+                                            <option value = "Waikato">Waikato</option>
+                                            <option value = "Westfalia">Westfalia</option>
+                                            <option value = "Otro">Otro (especificar en comentarios)</option>
+                                          </select>
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': maquinaOrdeneForm.cantOrganosTrabajados.$invalid }" >
+                                         <label>Cantidad de órganos con los que se trabaja</label>
+                                         <input class="form-control"  name="cantOrganosTrabajados" type="number" ng-model="relevamiento.maquinaOrdene.cantOrganosTrabajados">
+                                         <p ng-show="maquinaOrdeneForm.cantOrganosTrabajados.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                      <div class="col-lg-6" ng-class="{ 'has-error': maquinaOrdeneForm.cantOrganosNoUsados.$invalid }" >
+                                         <label>Cantidad de órganos disponibles pero no utilizados</label>
+                                         <input class="form-control"  name="cantOrganosNoUsados" type="number" ng-model="relevamiento.maquinaOrdene.cantOrganosNoUsados">
+                                         <p ng-show="maquinaOrdeneForm.cantOrganosNoUsados.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="relevamiento.maquinaOrdene.variadorVelocidadBoolean=false" 
+                                               ng-model="relevamiento.maquinaOrdene.variadorVelocidadBoolean">Tiene variador de velocidad</label>
+                                         </div>
+                                      </div> 
+                                   </div> 
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Bomba de leche:</label>
+                                            <select name="bombaDe" class="form-control" ng-model="relevamiento.maquinaOrdene.bombaDe">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Electrica">Eléctrica</option>
+                                               <option value = "Neumatica">Neumática</option>
+                                            </select>
+                                         </div>
+                                      </div>    
+                                      <div class="col-lg-6" ng-class="{ 'has-error': maquinaOrdeneForm.caudalNominal.$invalid }" >
+                                         <label>Caudal nominal de la bomba @50kPa (litros/minuto)</label>
+                                         <input class="form-control"  name="caudalNominal" type="number" ng-model="relevamiento.maquinaOrdene.caudalNominal">
+                                         <p ng-show="maquinaOrdeneForm.caudalNominal.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>                                      
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Tipo de bomba de vacío</label>
+                                            <select name="tipoBomba" class="form-control" ng-model="relevamiento.maquinaOrdene.tipoBomba">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Paletas">Paletas</option>
+                                               <option value = "James">James</option>
+                                               <option value = "Otro">Otro (especificar en comentarios)</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6" ng-class="{ 'has-error': maquinaOrdeneForm.depresionVacio.$invalid }" >
+                                         <label>Depresión de vacío (kPa)</label>
+                                         <input class="form-control"  name="depresionVacio" type="number" ng-model="relevamiento.maquinaOrdene.depresionVacio">
+                                         <p ng-show="maquinaOrdeneForm.depresionVacio.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>                                             
+                                   </div>
+                                 </br>
+
+                                <div class="row">
+                                   <div class="col-lg-12">
+                                         <div class="panel box box-primary">
+                                            <div class="box-header with-border">
+                                               <h4 class="box-title">
+                                                  <a ng-click="bombasVacioIsCollapsed = !bombasVacioIsCollapsed">
+                                                  Bombas de vacío
+                                                  </a>
+                                               </h4>
+                                            </div>
+                                            <div collapse="bombasVacioIsCollapsed">
+                                               <div class="box-body table-responsive no-padding">
+                                                  <table class="table table-hover">
+                                                     <tr>
+                                                        <th>Id</th>
+                                                        <th>Marca</th>
+                                                        <th>Potencia nominal</th>
+                                                        <th>Caudal nominal</th>
+                                                        <th>Potencia medida</th>
+                                                        <th>Acción</th>
+                                                     </tr>
+                                                     <tr ng-repeat="bomba in relevamiento.maquinaOrdene.bombas">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{bomba.marca}}</td>
+                                                        <td>{{bomba.potenciaNominal}}</td>
+                                                        <td>{{bomba.caudalNominal}}</td>
+                                                        <td>{{bomba.potenciaMedida}}</td>
+                                                        <td>
+                                                           <a ng-click="modificarBombaClicked(bomba,$index)">
+                                                           Editar
+                                                           </a>
+                                                           -  
+                                                           <a ng-click="borrarBombaClicked(bomba,$index)">
+                                                           Borrar
+                                                           </a>
+                                                        </td>
+                                                     </tr>
+                                                  </table>
+                                                  <div class="box-footer">
+                                                     <button class="btn btn-info" ng-click="agregarBombaClicked()">Agregar</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios sobre la máquina de ordeñe</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamiento.maquinaOrdene.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="sistemaFrioIsCollapsed = !sistemaFrioIsCollapsed">
+                                Sistema de frío
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="sistemaFrioIsCollapsed">
+                             <div class="box-body">
+                                <form name="sistemaFrioForm" novalidate>
+                                   <div class="row">
+                                   <div class="col-lg-12">
+                                         <div class="panel box box-primary">
+                                            <div class="box-header with-border">
+                                               <h4 class="box-title">
+                                                  <a ng-click="bombasVacioIsCollapsed = !bombasVacioIsCollapsed">
+                                                  Tanques de frío
+                                                  </a>
+                                               </h4>
+                                            </div>
+                                            <div collapse="bombasVacioIsCollapsed">
+                                               <div class="box-body table-responsive no-padding">
+                                                  <table class="table table-hover">
+                                                     <tr>
+                                                        <th>Id</th>
+                                                        <th>Marca</th>
+                                                        <th>Volúmen (litros)</th>
+                                                        <th>Antiguedad (años)</th>
+                                                        <th>Clase</th>
+                                                        <th>A la intemperie</th>
+                                                        <th>Enfriamiento post ordeñe (minutos)</th>
+                                                        <th>Posee tanque recup. calor</th>
+                                                        <th>Capacidad (litros)</th>
+                                                        <th>Acción</th>
+                                                     </tr>
+                                                     <tr ng-repeat="tanque in relevamientoNuevo.sistemaFrio.tanques">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{tanque.marca}}</td>
+                                                        <td>{{tanque.volumen}}</td>
+                                                        <td>{{tanque.antiguedad}}</td>
+                                                        <td>{{tanque.clase}}</td>
+                                                        <td ng-if="tanque.intemperieBoolean">Sí</td>
+                                                        <td ng-if="!tanque.intemperieBoolean">No</td>
+                                                        <td>{{tanque.tiempoEnfriamiento}}</td>  
+                                                        <td ng-if="tanque.tanqueCalorBoolean">Sí</td>
+                                                        <td ng-if="!tanque.tanqueCalorBoolean">No</td>
+                                                        <td>{{tanque.capacidad}}</td>
+                                                        <td>
+                                                           <a ng-click="modificarTanqueClicked(tanque,$index)">
+                                                           Editar
+                                                           </a>
+                                                           -  
+                                                           <a ng-click="borrarTanqueClicked(tanque,$index)">
+                                                           Borrar
+                                                           </a>
+                                                        </td>
+                                                     </tr>
+                                                  </table>
+                                                  <div class="box-footer">
+                                                     <button class="btn btn-info" ng-click="agregarTanqueClicked()">Agregar</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios sobre el sistema de frío</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamientoNuevo.sistemaFrio.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>  
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="itercambiadorIsCollapsed = !itercambiadorIsCollapsed">
+                                Intercambiador de placas
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="itercambiadorIsCollapsed">
+                             <div class="box-body">
+                                <form name="intercambiadorForm" novalidate>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="intercambiadorForm.tieneIntercambiadorBoolean=false" 
+                                               ng-model="relevamientoNuevo.intercambiadorPlacas.tieneIntercambiadorBoolean">Tiene intercambiador de placas</label>
+                                         </div>
+                                      </div> 
+                                   </div>
+
+                                   <div class="row" ng-show="relevamientoNuevo.intercambiadorPlacas.tieneIntercambiadorBoolean== true">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Situación del intercambiador</label>
+                                            <select name="situacion" class="form-control" ng-model="relevamientoNuevo.intercambiadorPlacas.situacion">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Bien conectado">Bien conectado</option>
+                                               <option value = "Mal conectado">Mal conectado</option>
+                                               <option value = "Fuera de servicio">Fuera de servicio</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Relación del caudal (agua/leche)</label>
+                                            <input class="form-control" name = "relacionCaudal" ng-model="relevamientoNuevo.intercambiadorPlacas.relacionCaudal">
+                                         </div>
+                                      </div>                                              
+                                   </div>
+                                   <div class="row" ng-show="relevamientoNuevo.intercambiadorPlacas.tieneIntercambiadorBoolean== true">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Marca</label>
+                                            <input class="form-control" name = "marca" ng-model="relevamientoNuevo.intercambiadorPlacas.marca">
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Modelo</label>
+                                            <input class="form-control" name = "modelo" ng-model="relevamientoNuevo.intercambiadorPlacas.modelo">
+                                         </div>
+                                      </div>                                              
+                                   </div>
+                                   <div class="row" ng-show="relevamientoNuevo.intercambiadorPlacas.tieneIntercambiadorBoolean== true">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': intecambiadorForm.numeroPlacas.$invalid }" >
+                                         <label>Número de placas</label>
+                                         <input class="form-control"  name="numeroPlacas" type="number" ng-model="relevamientoNuevo.intercambiadorPlacas.numeroPlacas">
+                                         <p ng-show="intecambiadorForm.numeroPlacas.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>
+                                      <div class="col-lg-6" ng-class="{ 'has-error': intercambiadorForm.temperaturaLeche.$invalid }" >
+                                         <label>Temperatura de leche pre-enfriada (°C)</label>
+                                         <input class="form-control"  name="temperaturaLeche" type="number" ng-model="relevamientoNuevo.intercambiadorPlacas.temperaturaLeche">
+                                         <p ng-show="intercambiadorForm.temperaturaLeche.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div>                                             
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6" ng-class="{ 'has-error': intercambiadorForm.temperaturaAgua.$invalid }" >
+                                         <label>Temperatura de agua para enfriamiento (°C)</label>
+                                         <input class="form-control"  name="temperaturaAgua" type="number" ng-model="relevamientoNuevo.intercambiadorPlacas.temperaturaAgua">
+                                         <p ng-show="intercambiadorForm.temperaturaAgua.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div> 
+                                    </div>
+                                    <div class="row" ng-show="relevamientoNuevo.intercambiadorPlacas.tieneIntercambiadorBoolean== true">
+                                      <div class="col-lg-6">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="intercambiadorForm.caudalesSincronizadosBoolean=false" 
+                                               ng-model="relevamientoNuevo.intercambiadorPlacas.caudalesSincronizadosBoolean">Caudales sincronizados</label>
+                                        </div>                                            
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios del intercambiador de placas</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamientoNuevo.intercambiadorPlacas.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div> 
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="calentamientoAguaIsCollapsed = !calentamientoAguaIsCollapsed">
+                                Calentamiento de agua
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="calentamientoAguaIsCollapsed">
+                             <div class="box-body">
+                                <form name="calentamientoAguaForm" novalidate>
+                                   <div class="row">
+                                   <div class="col-lg-12">
+                                         <div class="panel box box-primary">
+                                            <div class="box-header with-border">
+                                               <h4 class="box-title">
+                                                  <a ng-click="calentamientoIsCollapsed = !calentamientoIsCollapsed">
+                                                  Termotanques, colectores solares y recuperadores de calor
+                                                  </a>
+                                               </h4>
+                                            </div>
+                                            <div collapse="calentamientoIsCollapsed">
+                                               <div class="box-body table-responsive no-padding">
+                                                  <table class="table table-hover">
+                                                     <tr>
+                                                        <th>Equipo</th>
+                                                        <th>Marca</th>
+                                                        <th>Fuente energía</th>
+                                                        <th>Volúmen (litros)</th>
+                                                        <th>Potencia (kW)</th>
+                                                        <th>Etiqueta eficiencia</th>
+                                                        <th>Timer</th>
+                                                        <th>Horas de uso</th>
+                                                        <th>Horario</th>
+                                                        <th>Temperatura seteada (°C)</th>
+                                                        <th>Temperatura de salida (°C)</th>
+                                                        <th>A la intemperie</th>
+                                                        <th>Estado</th>
+                                                        <th>Posee respaldo eléctrico</th>
+                                                        <th>Acción</th>
+                                                     </tr>
+                                                     <tr ng-repeat="equipo in relevamiento.calentamientoAgua.equipos track by $index">
+                                                        <td>{{equipo.equipo}}</td>
+                                                        <td>{{equipo.marca}}</td>
+                                                        <td>{{equipo.energia}}</td>
+                                                        <td>{{equipo.volumen}}</td>
+                                                        <td>{{equipo.potencia}}</td>
+                                                        <td>{{equipo.etiqueta}}</td>
+                                                        <td ng-if="equipo.timerBoolean">Sí</td>
+                                                        <td ng-if="!equipo.timerBoolean">No</td>
+                                                        <td>{{equipo.horas}}</td>
+                                                        <td>{{equipo.horario}}</td>
+                                                        <td ng-if="equipo.equipo=='Termotanque'">{{equipo.temperatura}}</td>
+                                                        <td ng-if="equipo.equipo!='Termotanque'">-</td>
+                                                        <td ng-if="equipo.equipo!='Termotanque'">{{equipo.temperatura}}</td>
+                                                        <td ng-if="equipo.equipo=='Termotanque'">-</td>
+                                                        <td ng-if="equipo.intemperieBoolean">Sí</td>
+                                                        <td ng-if="!equipo.intemperieBoolean">No</td>
+                                                        <td>{{equipo.estado}}</td>
+                                                        <td ng-if="equipo.respaldoElectricoBoolean">Sí</td>
+                                                        <td ng-if="!equipo.respaldoElectricoBoolean">No</td>
+                                                        <td>
+                                                           <a ng-click="modificarEquipoCalentamientoClicked(equipo,$index)">
+                                                           Editar
+                                                           </a>
+                                                           -  
+                                                           <a ng-click="borrarEquipoCalentamientoClicked(equipo,$index)">
+                                                           Borrar
+                                                           </a>
+                                                        </td>
+                                                     </tr>
+                                                  </table>
+                                                  <div class="box-footer">
+                                                     <button class="btn btn-info" ng-click="agregarEquipoCalentamientoClicked()">Agregar</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="calentamientoAguaForm.problemasAguaDuraBoolean=false" 
+                                               ng-model="relevamiento.calentamientoAgua.problemasAguaDuraBoolean">Problemas de agua dura</label>
+                                        </div>                                            
+                                      </div>
+                                      <div class="col-lg-6" ng-show="relevamiento.calentamientoAgua.problemasAguaDuraBoolean">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="calentamientoAguaForm.tieneAblandadorBoolean=false" 
+                                               ng-model="relevamiento.calentamientoAgua.tieneAblandadorBoolean">Tiene ablandador</label>
+                                        </div>                                            
+                                      </div> 
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios sobre el calentamiento de agua</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamiento.calentamientoAgua.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div> 
+                                   <div class="row">
+                                      <div class="col-lg-3">
+                                            <button type="file" ngf-select="subirFoto($file, $invalidFiles, 'Calentamiento de agua')"
+                                               ngf-max-height="1000" ngf-max-size="10MB">
+                                                 Subir archivo
+                                            </button>
+                                      </div>
+                                      <div class="col-lg-8 col-lg-offset-1">
+                                                 <img height="300" width="300" id='Calentamiento de agua'/>
+                                      </div>
+                                      <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                          <span class="progress" ng-show="f.progress >= 0">
+                                              <div style="width:{{f.progress}}%"  
+                                                   ng-bind="f.progress + '%'"></div>
+                                          </span>
+                                      </div>     
+                                      {{errorMsg}}
+                                   </div>
+                                   <div class="row"></br>
+                                      <div class="col-lg-12">
+                                            <button class="btn btn-primary" ng-click="calentamientoAguaSiguiente()">Siguiente</button>
+                                      </div>
+                                    </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="otrosEquiposIsCollapsed = !otrosEquiposIsCollapsed">
+                                Otros equipos
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="otrosEquiposIsCollapsed">
+                             <div class="box-body">
+                                <form name="otrosEquiposForm" novalidate>
+                                   <div class="row">
+                                   <div class="col-lg-12">
+                                         <div class="panel box box-primary">
+                                            <div class="box-header with-border">
+                                               <h4 class="box-title">
+                                                  <a ng-click="otrosEquipIsCollapsed = !otrosEquipIsCollapsed">
+                                                  Listado de equipos
+                                                  </a>
+                                               </h4>
+                                            </div>
+                                            <div collapse="otrosEquipIsCollapsed">
+                                               <div class="box-body table-responsive no-padding">
+                                                  <table class="table table-hover">
+                                                     <tr>
+                                                        <th>Equipo</th>
+                                                        <th>Marca</th>
+                                                        <th>Modelo</th>
+                                                        <th>Potencia (kW)</th>
+                                                        <th>Capacidad</th>
+                                                        <th>Descripción de uso</th>
+                                                        <th>Horas</th>
+                                                        <th>Acción</th>
+                                                     </tr>
+                                                     <tr ng-repeat="equipo in relevamientoNuevo.otrosEquipos.equipos">
+                                                        <td>{{equipo.equipo}}</td>
+                                                        <td>{{equipo.marca}}</td>
+                                                        <td>{{equipo.modelo}}</td>
+                                                        <td>{{equipo.potencia}}</td>
+                                                        <td>{{equipo.capacidad}}</td>
+                                                        <td>{{equipo.descripcion}}</td>
+                                                        <td>{{equipo.horas}}</td>
+                                                        <td>
+                                                           <a ng-click="modificarOtroEquipoClicked(equipo,$index)">
+                                                           Editar
+                                                           </a>
+                                                           -  
+                                                           <a ng-click="borrarOtroEquipoClicked(equipo,$index)">
+                                                           Borrar
+                                                           </a>
+                                                        </td>
+                                                     </tr>
+                                                  </table>
+                                                  <div class="box-footer">
+                                                     <button class="btn btn-info" ng-click="agregarOtroEquipoClicked()">Agregar</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios relativos al listado de otros equipos</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamientoNuevo.otrosEquipos.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div> 
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="datosEstadisticosIsCollapsed = !datosEstadisticosIsCollapsed">
+                                Datos estadísticos
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="datosEstadisticosIsCollapsed">
+                             <div class="box-body">
+                                <form name="datosEstadisticosForm" novalidate>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Rango de edad del productor</label>
+                                            <select name="situacion" class="form-control" ng-model="relevamientoNuevo.datosEstadisticos.edad">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "18 a 29 anos">18 a 29 años</option>
+                                               <option value = "30 a 39 anos">30 a 39 años</option>
+                                               <option value = "40 a 49 anos">40 a 49 años</option>
+                                               <option value = "50 a 59 anos">50 a 59 años</option>
+                                               <option value = "60 a 69 anos">60 a 69 años</option>
+                                               <option value = "70 a 79 anos">70 a 79 años</option>
+                                               <option value = "80 o mas anos">80 o más años</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Régimen de propiedad de la tierra</label>
+                                            <select name="situacion" class="form-control" ng-model="relevamientoNuevo.datosEstadisticos.regimenPropiedad">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "Propietario">Propietario</option>
+                                               <option value = "Arrendatario">Arrendatario</option>
+                                               <option value = "Colonización">Colonización</option>
+                                               <option value = "Otro (especificar en comentarios)">Otro (especificar en comentarios)</option>
+                                            </select>
+                                         </div>
+                                      </div>                                               
+                                   </div>
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" ng-init="datosEstadisticosForm.establecimientoFamiliarBoolean=false" 
+                                               ng-model="relevamientoNuevo.datosEstadisticos.establecimientoFamiliarBoolean">Establecimiento familiar</label>
+                                        </div>                                            
+                                      </div>
+                                      <div class="col-lg-6" ng-class="{ 'has-error': datosEstadisticosForm.cantEmpleados.$invalid }" >
+                                         <label>Cantidad de empleados</label>
+                                         <input class="form-control"  name="datosEstadisticos" type="number" ng-model="relevamiento.datosEstadisticos.cantEmpleados">
+                                         <p ng-show="datosEstadisticosForm.cantEmpleados.$invalid" class="help-block">Debe ingresar un número </p>
+                                      </div> 
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                         <div class="form-group">
+                                            <label>Comentarios</label>
+                                            <textarea class="form-control" rows="5" ng-model="relevamientoNuevo.datosEstadisticos.comentarios"></textarea>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <div class="panel box box-info">
+                          <div class="box-header with-border">
+                             <h4 class="box-title">
+                                <a ng-click="frasesInformeIsCollapsed = !frasesInformeIsCollapsed">
+                                Frases para informe
+                                </a>
+                             </h4>
+                          </div>
+                          <div collapse="frasesInformeIsCollapsed">
+                             <div class="box-body">
+                                <form name="frasesInformeForm" novalidate>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Instalación eléctrica - Frase para resúmen ejecutivo</label>
+                                            <select class="form-control" ng-model="relevamientoNuevo.frasesInforme.instalacionElectricaEjecutivo">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">Revisión por un profesional calificado y habilitado</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Instalación eléctrica - Desarrollo cuerpo informe</label>
+                                            <select  class="form-control" ng-model="relevamientoNuevo.frasesInforme.instalacionElectricaInforme">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">Durante el relevamiento se comprobó que el estado de las instalaciones electrica no cumple con algunos puntos de la normativa. Se sugiere la revisión de la misma por un profesional calificado y habilitado</option>
+                                            </select>
+                                         </div>
+                                      </div>                                               
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Llave diferencial - Frase para resúmen ejecutivo</label>
+                                            <select class="form-control" ng-model="relevamientoNuevo.frasesInforme.llaveDiferencialEjecutivo">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">Instalación de una llave diferencial</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Llave diferencial - Desarrollo cuerpo informe</label>
+                                            <select  class="form-control" ng-model="relevamientoNuevo.frasesInforme.llaveDiferencialInforme">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option  value = "1">En el relevamiento realizado se constató la inexistencia de este equipamiento. Dada su importancia relativa a su seguridad (ya que su función es proteger la vida de las personas), se exhorta a la instalación de una llave diferencial de igual intensidad nominal que la llave general y una sensibilidad de 30mA que protega todos los circuitos del establecimiento.</option>
+                                            </select>
+                                         </div>
+                                      </div>                                               
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Puesta a tierra - Frase para resúmen ejecutivo</label>
+                                            <select class="form-control" ng-model="relevamientoNuevo.frasesInforme.puestaATierraEjecutivo">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">Medición puesta a tierra </option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Puesta a tierra - Desarrollo cuerpo informe</label>
+                                            <select  class="form-control" ng-model="relevamientoNuevo.frasesInforme.puestaATierraInforme">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">La existencia de una puesta a tierra adecuada es otro elemento esencial de seguridad. Permite evitar que las descargas eléctricas generadas por el equipamiento se canalicen a través de las personas. Se recomienda corroborar que todos los equipos tengan conexión a la puesta a tierra.</option>
+                                            </select>
+                                         </div>
+                                      </div>                                               
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Tablero - Frase para resúmen ejecutivo</label>
+                                            <select class="form-control" ng-model="relevamientoNuevo.frasesInforme.tableroEjecutivo">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">Tablero central estanco</option>
+                                            </select>
+                                         </div>
+                                      </div> 
+                                      <div class="col-lg-6">
+                                         <div class="form-group">
+                                            <label>Tablero - Desarrollo cuerpo informe</label>
+                                            <select  class="form-control" ng-model="relevamientoNuevo.frasesInforme.tableroInforme">
+                                               <option value = "">Seleccione una opción</option>
+                                               <option value = "1">La instalación deberá contener al menos un tablero que centralice una llave diferencial junto con las llaves térmicas, además de contener un borne para conectar el cable a tierra. Se sugiere la implementación de un tablero central estanco.</option>
+                                            </select>
+                                         </div>
+                                      </div>                                               
+                                   </div>
+                                </form>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div cg-busy="{promise:myPromise,message:'Espere',templateUrl:'../views/busyTemplate.html'}"></div>
+                    <div class="col-lg-10" ng-show="true">
+                      <button ng-show="checkRol(1) && bConnected" class="btn btn-primary" ng-disabled="riegoForm.$invalid || electricaForm.$invalid || relevamiento1.$invalid || 
+                                maquinaForm.$invalid" ng-click="crearRelevamiento(1)">Guardar</button>
+                                
+                                 <p ng-show="riegoForm.$invalid || electricaForm.$invalid || relevamiento1.$invalid || 
+                                relevamiento2.$invalid || maquinaForm.$invalid" class="help-block"  style="color:red;"> Corrija formulario </p>
+                    </div> 
+                  </div>
+                </div>
+        </div>
+     </div>
+     </div>
+  </div>
+
+
+    <div class="panel panel-info" ng-show = "auditoria.devolucion === null">
+          <div class="panel-body">
+            No se ha realizado la devolución aún.
+          </div>
+    </div>
+
+
+
+
+
+  <div class="panel panel-info" ng-show = "auditoria.devolucion !== null" >
+    <div class="panel-heading" ng-click="DevolucionIsCollapsed = !DevolucionIsCollapsed">
+      Devolución realizada
+    </div>
+    <div collapse="DevolucionIsCollapsed">
+      <div class="panel-body" ng-controller="RealizarAuditoriaCtrl as rc">
+
+        <div class="row">
+          <div class="col-lg-12">
+             <div class="panel box box-info">
+                <div class="box-header with-border">
+                   <h4 class="box-title">
+                      <a ng-click="aceptacionIsCollapsed = !aceptacionIsCollapsed">
+                      Medidas
+                      </a>
+                   </h4>
+                </div>
+                <div collapse="aceptacionIsCollapsed">
+                   <div class="box-body">
+                      <table class="table table-hover" id="tabla_medidas">
+                          <thead>
+                              <tr>
+                                  <th>Medida</th>
+                                  <th>Descripción</th>
+                                  <th>Sugerida</th>
+                                  <th>Ahorro mensual</th>
+                                  <th>Aceptada</th>
+                                  <th>Implementada</th>
+                                  <th>Próximo seguimiento</th>
+                              </tr>
+                          </thead>
+                          <tbody ng-repeat="medida in auditoria.devolucion.medidas">
+                              <tr>
+                                  <td><a ng-click="detalleMedida(auditoria.id,medida.id)"> {{medida.medida}} </a> </td> 
+                                  <td><a ng-click="detalleMedida(auditoria.id,medida.id)"> {{medida.descripcion}} </a> </td> 
+                                  <td><a ng-click="detalleMedida(auditoria.id,medida.id)"> {{medida.sugerida}} </a> </td> 
+                                  <td  width=100px ng-if="medida.ahorroMensual!='N/A'"><a ng-click="detalleMedida(auditoria.id,medida.id)"> $ &nbsp;{{medida.ahorroMensual}} </a> </td>
+                                  <td width=100px ng-if="medida.ahorroMensual=='N/A'"><a ng-click="detalleMedida(auditoria.id,medida.id)"> {{medida.ahorroMensual}} </a> </td>
+                                  <td width=100px><a ng-click="detalleMedida(auditoria.id,medida.id)"> {{medida.acepta}} </a></td>
+                                  <td width=100px ng-if="medida.costoImplementacion>0"><a ng-click="detalleMedida(auditoria.id,medida.id)"> Si </a></td>
+                                  <td width=100px ng-if="!medida.costoImplementacion>0"><a ng-click="detalleMedida(auditoria.id,medida.id)"> No </a></td>
+                                  <td width=150px><a ng-click="detalleMedida(auditoria.id, medida.id)"> {{medida.proximoSeguimiento}} </a> </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+             <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" rows="3" readonly ng-model="auditoria.devolucion.observaciones"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+      <div ng-if="bConnected" id="App2" ng-app="namesList" ng-controller="FileManagerCtrl">
+      
+        <angular-filemanager auditoriaId="1"></angular-filemanager>  
+      </div>    
+        </div>
+        <!-- /.panel Relevamiento telefónico-->
+    </div>
+          
+               
+  </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

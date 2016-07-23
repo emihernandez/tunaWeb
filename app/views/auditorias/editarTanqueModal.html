@@ -1,0 +1,78 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form">
+                <div class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="tanqueAModificar.marca">
+                          <option value ="">Seleccione una marca</option>
+                          <option value="Alfa Laval">Alfa Laval</option>
+                          <option value="Bauducco">Bauducco</option>
+                          <option value="Dairy Master">Dairy Master</option>
+                          <option value="De Laval">De Laval</option>
+                          <option value="Eistcheid">Eistcheid</option>
+                          <option value="Kesell">Kesell</option>
+                          <option value="Fontsere">Fontsere</option>
+                          <option value="Gea Westfalia">Gea Westfalia</option>
+                          <option value="Japy">Japy</option>
+                          <option value="Milk Master">Milk Master</option>
+                          <option value="Milk Plan">Milk Plan</option>
+                          <option value="Mueller">Mueller</option>
+                          <option value="Packo">Packo</option>
+                          <option value="Prominox">Prominox</option>
+                          <option value="Reafrio">Reafrio</option>
+                          <option value="Rodeg">Rodeg</option>
+                          <option value="Ruakura">Ruakura</option>
+                          <option value="Serap">Serap</option>
+                          <option value="Setpar">Setpar</option>
+                          <option value="Surge">Surge</option>
+                          <option value="Urumilk">Urumilk</option>
+                          <option value="Otro">Otro</option>
+                      </select>
+                </div>
+
+                <div class="form-group" ng-show="tanqueAModificar.marca=='Otro'" >
+                    <label>Indique marca/modelo: </label>
+                    <input class="form-control" ng-model="tanqueAModificar.otraMarca">
+                    <p class="help-block"></p>
+                </div>
+
+                <div class="form-group">
+                      <label>Clase</label>
+                      <select class="form-control" ng-model="tanqueAModificar.clase">
+                          <option value ="">Seleccione una opción</option>
+                          <option value="2 ordenes">2 ordeñes</option>
+                          <option value="3 ordenes">3 ordeñes</option>
+                          <option value="4 ordenes">4 ordeñes</option>
+                          <option value="No sabe">No sabe</option>
+                      </select>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.capacidad.$invalid }">
+                    <label>Capacidad (litros)</label>
+                    <input class="form-control" name="capacidad" type="number" min="0" ng-model="tanqueAModificar.capacidad">
+                    <p ng-show="form.capacidad.$invalid" class="help-block">Debe ingresar una capacidad válida </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.antiguedad.$invalid }">
+                    <label>Antigüedad (años)</label>
+                    <input class="form-control" name="antiguedad" type="number" min="0" ng-model="tanqueAModificar.antiguedad">
+                    <p ng-show="form.antiguedad.$invalid" class="help-block">Debe ingresar los años de antigüedad del tanque </p>
+                </div>
+
+            </form>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ok()">Guardar</button>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

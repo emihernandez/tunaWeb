@@ -1,0 +1,455 @@
+<!-- Content Wrapper. Contains page content -->
+<!-- <div class="content-wrapper" style="min-height:970px"> -->
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Contratos
+      <small>Modificar Contrato</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Contrato</a></li>
+      <li class="active"><a href="#">Modificar Contrato</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+   <!-- ng-show="razonSocial !== undefined" -->
+    <div class="row col-lg-offset-1" style="padding-top: 5px;">
+        <div class="col-lg-9" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Datos del contrato
+                </div>
+                <div class="panel-body">
+                  <form name="contratoModificarForm" novalidate>
+                        <div class="panel box box-primary">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="datosPersonalesIsCollapsed = !datosPersonalesIsCollapsed">
+                                Datos Personales
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="datosPersonalesIsCollapsed">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>CI/Pasaporte <small>(Sin puntos ni guiones)</small> </label>
+                                    <input class="form-control" type = "number" name="ciCliente" ng-maxlength="8" ng-model="contrato.ciCliente" required>
+                                    <p class="help-block"></p>
+                                </div>
+                                <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.number"> &nbsp;&nbsp;Ingrese la cedula o pasaporte sin puntos ni guiones</span>
+                                <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.required"> &nbsp;&nbsp;Debe ingresar un número de cedula o pasaporte</span>
+                                <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.maxlength"> &nbsp;&nbsp;La cedula ingresada tiene mas de 8 digitos</span>
+                                </div>
+
+                                <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <label>Tipo de documento</label>
+                                      <label class="form-control">{{contrato.tipoCiString}}</label>
+                                      <p class="help-block"></p>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Nombres</label> 
+                                    <input class="form-control" name="nombres" ng-model="contrato.nombres" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3">
+                                <div class="form-group">
+                                    <label>Apellidos</label> 
+                                    <input class="form-control" name="apellidos" ng-model="contrato.apellidos" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3">
+                                <div class="form-group">
+                                <label>Fecha de nacimiento</label>
+                                    <input class="form-control" ng-model="contrato.fechaNacimiento" type="date" ng-bind="contrato.fechaNacimiento | contrato.fechaNacimiento:'dd/MM/yyyy'" >
+                                    <p class="help-block"></p>    
+                                  </div>
+                              </div> 
+
+                              <div class="col-lg-6" ng-show="contrato.tipoCi !== 3">
+                                  <div class="form-group">
+                                    <label>Genero</label>
+                                      <select class="form-control"  name="genero" ng-model="contrato.genero" required>
+                                          <option value="1">F</option>
+                                          <option value="2">M</option>
+                                      </select>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Telefono fijo</label> 
+                                    <input class="form-control" type="number" name="telefonoFijo" ng-maxlength="8" ng-model="contrato.telefonoFijo" >
+                                    <p class="help-block"></p>
+                                </div>
+                                <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.telefonoFijo.$error.maxlength"> &nbsp;&nbsp;El telefono ingresado tiene mas de 8 digitos</span>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Celular</label> 
+                                    <input class="form-control" type="number" name="celular" ng-maxlength="9" ng-model="contratoAux.celular" >
+                                    <p class="help-block"></p>
+                                    <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.celular.$error.maxlength"> &nbsp;&nbsp;El celular ingresado tiene mas de 9 digitos</span>
+                                    </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group" ng-class="{ 'has-error' : contratoModificarForm.email.$invalid }">
+                                  <label>Email</label>
+                                  <input class="form-control" type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"  ng-model="contrato.email">
+                                  <p ng-show="contratoModificarForm.email.$invalid" class="help-block">Debe ingresar un email válido </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label>Tipo de tramite</label>
+                                  <label class="form-control">{{contrato.tipoTramiteAux}}</label>
+                                  <p class="help-block"></p>
+                                </div>
+                              </div>  
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite !== 2">
+                                <div class="form-group">
+                                    <label>Servicio</label>
+                                      <select class="form-control"  ng-model="contrato.servicio">
+                                          <option ng-repeat="servicio in serviciosCambioAgente" value="{{servicio.nombre}}" >{{servicio.nombre}}</option>
+                                      </select>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite !== 1" ng-hide= "contrato.tipoTramite == 3" ng-if="contrato.tipoTramite !== 4">
+                                <div class="form-group">
+                                    <label>Servicio</label>
+                                      <select class="form-control"  ng-model="contrato.servicio">
+                                          <option ng-repeat="servicio in serviciosCambioProducto" value="{{servicio.nombre}}" >{{servicio.nombre}}</option>
+                                      </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" ng-show="contrato.tipoTramite !== 1">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Plazo contractual</label>
+                                      <select class="form-control"  ng-model="contrato.plazo">
+                                          <option value="">Seleccione plazo contractual</option>
+                                          <option value="1">1 año</option>
+                                          <option value="2">2 años</option>
+                                          <option value="3">Mantiene vigencia plan actual</option>
+                                          <option value="4">Sin plazo contractual</option>
+                                      </select>
+                                </div>
+                              </div>
+
+
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite !== 1" ng-hide= "contrato.tipoTramite == 3" ng-if="contrato.tipoTramite !== 4">
+                                <div class="checkbox"  >
+                                  <label></label>
+                                  <label><input type="checkbox"  value="aplicaTarifa" ng-model="aplicaTarifa" ng-init="aplicaTarifa">Aplica tarifa cambio de producto</label>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite == 4">
+                                <div class="checkbox"  >
+                                  <label></label>
+                                  <label><input type="checkbox"  value="aplicaTarifaNuevoServicio" ng-model="aplicaTarifaNuevoServicio" ng-init="aplicaTarifaNuevoServicio">Aplica tarifa nuevo servicio</label>
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel box box-info">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="domicilioIsCollapsed = !domicilioIsCollapsed">
+                                Datos del domicilio
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="domicilioIsCollapsed">  
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Localidad</label> 
+                                    <input class="form-control" name="localidad" ng-model="contrato.localidad" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                      <select class="form-control"  ng-model="contrato.departamento">
+                                          <option ng-repeat="dept in f" value="{{dept.nombre}}" >{{dept.nombre}}</option>
+                                      </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Calle</label> 
+                                    <input class="form-control" name="calle" ng-model="contrato.calle" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Número de puerta</label> 
+                                    <input class="form-control" name="numPuerta" ng-model="contrato.nroPuerta" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Apto</label> 
+                                    <input class="form-control" name="apto" ng-model="contrato.apto" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Padrón</label> 
+                                    <input class="form-control" name="padron" ng-model="contrato.padron" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Manzana</label> 
+                                    <input class="form-control" name="manzana" ng-model="contrato.manzana" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Solar</label> 
+                                    <input class="form-control" name="solar" ng-model="contrato.solar" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel box box-info">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="domicilioInstalacionIsCollapsed = !domicilioInstalacionIsCollapsed">
+                                Domicilio de Instalación
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="domicilioInstalacionIsCollapsed"> 
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group" >
+                                    <label>Localidad</label> 
+                                    <input class="form-control" name="localidad" ng-model="contrato.domicilio.localidad" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                      <select class="form-control"  ng-model="contrato.domicilio.departamento">
+                                          <option ng-repeat="dept in departamentosModificar" value="{{dept.nombre}}" >{{dept.nombre}}</option>
+                                      </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Calle</label> 
+                                    <input class="form-control" name="calle" ng-model="contrato.domicilio.calle" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Número de puerta</label> 
+                                    <input class="form-control" name="numPuerta" ng-model="contrato.domicilio.nroPuerta" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Apto</label> 
+                                    <input class="form-control" name="apto" ng-model="contrato.domicilio.apto" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Padrón</label> 
+                                    <input class="form-control" name="padron" ng-model="contrato.domicilio.padron" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Manzana</label> 
+                                    <input class="form-control" name="manzana" ng-model="contrato.domicilio.manzana" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Solar</label> 
+                                    <input class="form-control" name="solar" ng-model="contrato.domicilio.solar" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="panel box box-info">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a ng-click="facturaIsCollapsed = !facturaIsCollapsed">
+                                Envío de factura
+                              </a>
+                            </h4>
+                          </div>
+                          <div collapse="facturaIsCollapsed">  
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Localidad</label> 
+                                    <input class="form-control" name="localidad" ng-model="contrato.factura.localidad" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                      <select class="form-control"  ng-model="contrato.factura.departamento">
+                                          <option ng-repeat="dept in departamentosModificar" value="{{dept.nombre}}" >{{dept.nombre}}</option>
+                                      </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Calle</label> 
+                                    <input class="form-control" name="calle" ng-model="contrato.factura.calle" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Número de puerta</label> 
+                                    <input class="form-control" name="numPuerta" ng-model="contrato.factura.nroPuerta" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Apto</label> 
+                                    <input class="form-control" name="apto" ng-model="contrato.factura.apto" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Padrón</label> 
+                                    <input class="form-control" name="padron" ng-model="contrato.factura.padron" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Manzana</label> 
+                                    <input class="form-control" name="manzana" ng-model="contrato.factura.manzana" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Solar</label> 
+                                    <input class="form-control" name="solar" ng-model="contrato.factura.solar" >
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br/>
+                      <div class="row">
+                        <div class="col-lg-2">
+                          <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="modificarContrato()">Modificar</button>
+                          <span style="color:red" class="error" ng-if="contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.required || contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.maxlength || contratoModificarForm.$submitted && contratoModificarForm.ciCliente.$error.number || contratoModificarForm.$submitted && contratoModificarForm.celular.$error.maxlength || contratoModificarForm.$submitted && contratoModificarForm.telefonoFijo.$error.maxlength "> &nbsp;&nbsp;Por favor corrija el formulario</span>
+                        </div>
+                        <div class="col-lg-2">
+                          <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="volver()">Volver</button>
+                        </div>
+                      </div>
+                  </form>
+                </div><!-- /.box -->
+
+
+
+                   
+             </div>
+            <br/> 
+      </div>
+                
+    </div>
+  </section><!-- /.content -->
+<!-- </div><!-- /.content-wrapper -->
+

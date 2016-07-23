@@ -1,0 +1,165 @@
+<div  style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Adm. Usuarios
+      <small>Creación de usuario</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="glyphicon glyphicon-user"></i> Adm. Usuarios</a></li>
+      <li class="active"><a href="#">Crear</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+  <div class="row col-lg-offset-1" style="padding-top: 5px;">
+    <div class="col-lg-9">
+      <div class="panel panel-info">
+        <div class="panel-body">
+         <div class="panel box box-info">
+          <div class="box-header with-border">
+            <div class="box-header with-border">
+            <h4 class="box-title">
+              <a ng-click="usuarioIsCollapsed = !usuarioIsCollapsed">
+                Nuevo usuario
+              </a>
+            </h4>
+          </div> 
+          <div class="box-body pad">
+
+           <form name="usuarioForm" novalidate>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input class="form-control" name="nombre" ng-model="usuario.nombre" required>
+                  <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.nombre.$error.required"> 
+                  &nbsp;&nbsp;Este campo es obligatorio</span>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Apellido</label>
+                  <input class="form-control" name="apellido" ng-model="usuario.apellido" required>
+                  <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.apellido.$error.required"> 
+                  &nbsp;&nbsp;Este campo es obligatorio</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Teléfono</label>
+                  <input class="form-control" name="telefono" ng-model="usuario.telefono" required>
+                  <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.telefono.$error.required"> 
+                  &nbsp;&nbsp;Este campo es obligatorio</span>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Correo electrónico</label>
+                  <input class="form-control" name="mail" ng-model="usuario.mail" required>
+                  <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.mail.$error.required"> 
+                  &nbsp;&nbsp;Este campo es obligatorio</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Nombre de usuario</label>
+                  <input class="form-control" name="username" ng-model="usuario.username" required>
+                  <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.username.$error.required"> 
+                  &nbsp;&nbsp;Este campo es obligatorio</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="box box-info">
+              <div class="box-header">
+                <h4 class="box-title">
+                  <a ng-click="rolesIsCollapsed = !rolesIsCollapsed">
+                      Roles
+                  </a>
+                </h4>
+              </div>
+              
+              <div collapse="rolesIsCollapsed">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-lg-12" >
+                       <div class="form-group">
+                        <div>
+                          <div class="col-lg-4">
+                            <div class="checkbox">
+                               <label><input type="checkbox" value="" ng-init="rol.admin=false" 
+                                  ng-model="rol.admin">Administrador</label>
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="checkbox">
+                               <label><input type="checkbox" value="" ng-init="rol.auditor=false" 
+                                  ng-model="rol.auditor">Auditor</label>
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="checkbox">
+                               <label><input type="checkbox" value="" ng-init="rol.backoffice=false" 
+                                  ng-model="rol.backoffice">Backoffice</label>
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="checkbox">
+                               <label><input type="checkbox" value="" ng-init="rol.director=false" 
+                                  ng-model="rol.director">Director</label>
+                            </div>
+                          </div>
+                                                                             
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-lg-12">
+              <button class="btn btn-primary" type="submit" ng-click="crearUsuario()">Crear</button>
+              <span style="color:red" class="error" ng-if="usuarioForm.$submitted && usuarioForm.nombre.$error.required || 
+                                                           usuarioForm.$submitted && usuarioForm.apellido.$error.required || 
+                                                           usuarioForm.$submitted && usuarioForm.telefono.$error.required || 
+                                                           usuarioForm.$submitted && usuarioForm.mail.$error.required || 
+                                                           usuarioForm.$submitted && usuarioForm.username.$error.required"> 
+              &nbsp;&nbsp;Por favor corrija el formulario</span>
+            </div>
+
+            <div class="col-lg-12">
+            </br>
+              La contraseña por defecto es igual al nombre de usuario. </br>
+              Al ingresar por primera vez, se recomienda al usuario cambiar su contraseña.
+            </div>
+
+
+          </form>
+
+          </div> 
+
+        </div> 
+        
+      </div>
+    </div>
+
+    </div>
+    <!-- /.col-lg-12 -->
+   
+  </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->

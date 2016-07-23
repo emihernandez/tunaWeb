@@ -1,0 +1,204 @@
+<div  style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Auditoría
+      <small>Registrar potencial auditoría</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Auditoria</a></li>
+      <li class="active"><a href="#">Crear</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+  <div class="row col-lg-offset-1" style="padding-top: 5px;">
+    <div class="col-lg-9">
+      <div class="panel panel-info">
+        <div class="panel-body">
+         <div class="panel box box-info">
+            <div class="box-header with-border">
+              <h4 class="box-title">
+                  Productor
+              </h4>
+            </div>
+
+              <div>
+                 <div class="box-body pad" ng-controller="ProductorCtrl">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label>Matrícula</label>
+                       <form class="form-inline" name="buscador" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error' : buscador.matriculaBuscar.$invalid}">
+                              <input class="form-control" name="matriculaBuscar" ng-model="matriculaBuscar" type="number" ng-minlength="1">
+                            </div>
+                            <button type="submit" ng-disabled="buscador.$invalid || buscador.$pristine || !buscador.matriculaBuscar.$viewValue.length" class="btn btn-default" ng-click="child.buscarProductor()">Buscar</button>
+                      </form>
+                      <p ng-show="buscador.matriculaBuscar.$invalid" class="help-block">La matrícula debe ser un número</p>
+
+                    </div>
+                  </div>
+                  <div class="row col-lg-12">
+                    <div class="col-lg-9">
+                      <div class="form-group">
+                            <label>Razón social</label>
+                            <label class="form-control"> {{productor.razonSocial}}</label>
+                            <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row col-lg-12">
+                    <div class="col-lg-6">
+                      <div class="form-group" >
+                            <label>Tipo de establecimiento</label>
+                            <label class="form-control"> {{productor.tipoEstablecimiento}}</label>
+                            <p class="help-block"></p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Última remisión diaria promedio</label>
+                          <label class="form-control"> {{productor.ultimaRemision}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                         <!--  -->
+                          <a ng-click="contactosIsCollapsed = !contactosIsCollapsed">
+                            Contactos
+                          </a>
+                        </h4>
+                      </div>
+                      <div collapse="contactosIsCollapsed" >
+                        <div class="box-body table-responsive no-padding">
+                          <table class="table table-hover">
+                            
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Teléfono</th>
+                              <th>Email</th>
+                              <th>Principal</th>
+                              <th>Acción</th>
+                            </tr>                                       
+                            <tr ng-repeat="contacto in productor.contactos">
+                                <td>{{contacto.nombre}}</td>
+                                <td>{{contacto.telefono}}</td>
+                                <td>{{contacto.email}}</td>                                            
+                                <td>
+                                  <a ng-show="(contacto.principal == 0)" ng-click="setPrincipal(contacto)" data-toggle="tooltip" title="Marcar como primario">
+                                    {{descripcionDePrincipal(contacto.principal)}}
+                                  </a>
+                                  <div ng-show="(contacto.principal == 1)">
+                                    {{descripcionDePrincipal(contacto.principal)}}
+                                  </div>
+                                </td>
+                                <td>
+                                <!-- data-toggle="modal" data-target="#editarContactoModal"  -->
+                                  <a ng-click="modificarContactoClicked(contacto)">
+                                    Editar
+                                  </a>
+                                   -  
+                                  <a ng-click="borrarContactoClicked(contacto)">
+                                    Borrar
+                                  </a>
+                                 </td>
+                                <!-- <td><a ng-click="borrarContacto()">Borrar</a></td> -->
+                            </tr>
+                          </table>
+                          <div class="box-footer">
+                            <button ng-show="checkRol(4)" class="btn btn-info " ng-click="agregarContactoClicked()">Agregar</button>
+                        </div>
+                          
+                        </div><!-- /.box-body -->
+                        </div>
+                        
+                    </div>  
+                   </div>
+                </div>  
+              </div>  
+        </div>  
+        <div class="panel box box-primary">
+          <div class="box-header with-border">
+            <h4 class="box-title">
+              <a ng-click="contactosIsCollapsed = !contactosIsCollapsed">
+                Auditoría
+              </a>
+            </h4>
+          </div> 
+          <div class="box-body pad">
+
+           <form name="auditoriaForm" novalidate>
+
+
+            <div class="form-group">
+              <label>Mecanismo de contacto</label>
+              <select name="mecanismo" class="form-control"  ng-model="auditoriaNueva.mecanismoContacto" required>
+                  <option value="">Seleccione mecanismo de contacto</option>
+                  <option value="1">Llamada telefonica</option>
+                  <option value="2">Email</option>
+                  <option value="3">Web</option>
+                  <option value="4">Visita a la oficina</option>
+              </select>
+              <span style="color:red" class="error" ng-if="auditoriaForm.$submitted && auditoriaForm.mecanismo.$error.required"> &nbsp;&nbsp;Seleccione mecanismo de contacto</span>
+            </div>
+
+            <div class="form-group" ng-show = "mostrarCombo1">
+              <label>Tipo de auditoría</label>
+              <select name="tipo" class="form-control" ng-model="auditoriaNueva.tipo" required>
+                  <option value = "">Seleccione tipo de auditoría</option>
+                  <option value = "0">Sin registro</option>
+                  <option value = "1">Con registro</option>
+              </select>
+              <span style="color:red" class="error" ng-if="auditoriaForm.$submitted && auditoriaForm.tipo.$error.required"> &nbsp;&nbsp;Seleccione tipo de auditoría</span>
+            </div>
+
+            <div class="form-group" ng-show = "!mostrarCombo1">
+              <label>Tipo de auditoría</label>
+              <select class="form-control" ng-model="auditoriaNueva.tipo" disabled>
+                  <option value = "">Seleccione tipo de auditoría</option>
+                  <option value = "0">Sin registro</option>
+                  <option value = "1">Con registro</option>
+              </select>
+            </div>
+
+
+            <div class="form-group" ng-class="{ 'has-error' : auditoriaForm.precio.$invalid }">
+                <label>Precio</label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" class="form-control" name="precio" type="number" ng-model="auditoriaNueva.precio">
+                </div>
+                <p ng-show="auditoriaForm.precio.$invalid" class="help-block">El precio debe ser un número</p>
+            </div>
+
+            <div class="form-group">
+                <label>Notas</label>
+                <textarea class="form-control" rows="5" ng-model="auditoriaNueva.notas"></textarea>
+            </div>
+
+            <div class="col-lg-12">
+              <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="crearAuditoria(0)">Crear</button>
+              <span style="color:red" class="error" ng-if="auditoriaForm.$submitted && auditoriaForm.tipo.$error.required || 
+              auditoriaForm.$submitted && auditoriaForm.mecanismo.$error.required"> &nbsp;&nbsp;Por favor corrija el formulario</span>
+            </div>
+
+          </form>
+
+          </div> 
+
+        </div> 
+        
+      </div>
+    </div>
+
+    </div>
+    <!-- /.col-lg-12 -->
+   
+  </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->

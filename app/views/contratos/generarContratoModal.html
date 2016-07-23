@@ -1,0 +1,50 @@
+<!-- <div class="modal modal-danger">
+              <div class="modal-dialog"> -->
+             
+
+        <div class="panel panel-success"> 
+          <div class="panel-heading"> 
+             <h4 class="modal-title" >{{title}}</h4>
+            </div>
+          <div class="panel-body"> 
+            <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="form-group" ng-show="mostrarNumContrato" >
+                      <label>Número de Contrato</label> 
+                      <input class="form-control" name="numContrato" ng-model="numContratoIngresado" >
+                      <p class="help-block"></p>
+                      
+                  </div>
+                </div>
+                <div class="checkbox">
+                  <label></label>
+                  <label><input type="checkbox" value="" ng-init="generarRemitoAsociado" 
+                          ng-model="generarRemitoAsociado">Generar el remito asociado al contrato?</label>
+                </div>
+              </div>
+              <div class="row">
+                <span style="color:red" class="error" ng-show="existeNumContrato"> &nbsp;&nbsp;Ya existe ese numero de contrato, si confima se borrará el número asignado al contrato anterior.</span>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" rows="5" ng-model="observaciones"></textarea>
+                  </div>
+                </div>
+              </div>
+              <br/>
+            <div class="text-right text-bottom">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancelar</button>
+              <button type="button" class="btn btn-primary" ng-click="ok()">Confirmar</button>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+  
+<!--   </div><!-- /.modal-dialog -->
+
+

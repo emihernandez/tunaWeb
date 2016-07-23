@@ -1,0 +1,187 @@
+
+                                         
+  <section class="content-header">
+    <h1>
+      Remito
+      <small>Ver Remito</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Remito</a></li>
+      <li class="active"><a href="#">Ver</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row col-lg-offset-1" style="padding-top: 5px;">
+        
+        <div class="col-lg-9" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Remito
+                </div>
+                <div class="panel-body">
+                    <div class="panel box box-primary">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a >
+                                Datos del Remito
+                              </a>
+                            </h4>
+                          </div>
+                          <div > 
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Localidad</label>
+                                    <label class="form-control">{{remito.localidad}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Departamento</label> 
+                                    <label class="form-control">{{remito.departamento}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Calle</label> 
+                                    <label class="form-control">{{remito.calle}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Número de puerta</label> 
+                                    <label class="form-control">{{remito.nroPuerta}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Apto</label> 
+                                    <label class="form-control">{{remito.apto}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Padrón</label> 
+                                    <label class="form-control">{{remito.padron}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Manzana</label> 
+                                    <label class="form-control">{{remito.manzana}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Solar</label> 
+                                    <label class="form-control">{{remito.solar}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Esquina 1</label> 
+                                    <label class="form-control">{{remito.esquina1}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Esquina 2</label> 
+                                    <label class="form-control">{{remito.esquina2}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Fecha de visita</label> 
+                                    <label class="form-control">{{remito.fechaVisitaString}}</label>
+                                    <p class="help-block"></p> 
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row" >
+                              <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Hora de visita</label> 
+                                    <label class="form-control">{{remito.cuandoString}}</label>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3" >
+                                <div class="form-group"> 
+                                    <label></label>
+                                    <label class="form-control">{{remito.hora1}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-1" ng-show="remito.cuando=='2'">
+                                <div class="form-group"> 
+                                    <label></label><br>
+                                    <label>y</label>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3" ng-show="remito.cuando=='2'">
+                                <div class="form-group"> 
+                                    <label></label>
+                                    <label class="form-control">{{remito.hora2}}</label>
+                                    <p class="help-block"></p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class = "row">
+                              <div class="col-lg-12">
+                                <div class="form-group">
+                                  <label>Observaciones</label>
+                                  <textarea class="form-control" rows="5" readonly>{{remito.comentarios}}</textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+                <br/>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <button class="btn btn-primary" <a ui-sref="dashboard.RemitoListarVer" href="#">Volver</a></button>
+                    </div>
+                  </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+  </section><!-- /.content -->
+
+

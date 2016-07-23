@@ -1,0 +1,85 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Cambio masivo de estados de contratos </small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Contrato</a></li>
+      <li class="active"><a href="#">Cambio masivo de estados</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+
+          <div class="panel panel-info">
+                <div class="panel-heading">
+                    Cambios de estados ingresados
+                </div>
+              <div class="panel-body">
+                <div class="box-body">
+                  <table class="table table-hover" id="tabla_historico">
+                      <thead>
+                          <tr>
+                              <th>Id</th>
+                              <th>Número de Contrato</th>
+                              <th>Cedula del cliente</th>
+                              <th>Nuevo Estado</th>
+                              <th>Nueva Comisión</th>
+                              <th>Mensaje de error</th>
+                              <th> Aplicar cambio </th>
+                          </tr>
+                      </thead>
+                      <tbody ng-repeat="cambio in cambiosMasivos">
+                          <tr>
+                            <td>
+                                {{cambio.id}}
+                            </td>
+                            <td>
+                                {{cambio.numContrato}}
+                            </td>
+                            <td>
+                                {{cambio.ciCliente}}
+                            </td>
+                            <td>
+                                {{cambio.estado.estado}}
+                            </td>
+                            <td>
+                                {{cambio.estado.comisionString}}
+                            </td>
+                            <td>
+                                {{cambio.mensajeError}}
+                            </td>
+                            <td>
+                            <input ng-init="cambio.aplicarCambio"type="checkbox" ng-model="cambio.aplicarCambio" ng-disabled="cambio.error"></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                   <br/>
+                    <br/>
+                     <br/>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                  <button class="btn btn-primary" type="submit" ng-show="checkRol(4)" ng-click="confirmarCambiosMasivoCargados()">Aplicar cambios</button>
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-primary" <a ui-sref="dashboard.ContratoListarModificar" href="#">Cancelar</a></button>
+                </div>
+            </div>
+        <!-- </div> -->
+
+             
+      
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

@@ -1,0 +1,182 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Estados del contrato</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Contrato</a></li>
+      <li class="active"><a href="#">Ver Estados</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+
+        <div class="panel panel-info">
+          <div class="panel-heading" ng-click="infoBasicaContratoIsCollapsed = !infoBasicaContratoIsCollapsed">
+              Información básica del contrato
+          </div>
+            <div collapse="infoBasicaContratoIsCollapsed">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>CI/Pasaporte</label>
+                          <label class="form-control">{{contrato.ciCliente}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Tipo de documento</label>
+                          <label class="form-control">{{contrato.tipoCi}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Nombres</label> 
+                          <label class="form-control">{{contrato.nombres}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Apellidos</label> 
+                          <label class="form-control">{{contrato.apellidos}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                      <label>Fecha de nacimiento</label>
+                          <label class="form-control">{{contrato.fechaNacimiento}}</label>
+                          <p class="help-block"></p> 
+                      </div>
+                    </div> 
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Genero</label>
+                          <label class="form-control">{{contrato.genero}}</label>
+                          <p class="help-block"></p>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Telefono fijo</label> 
+                          <label class="form-control">{{contrato.telefonoFijo}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Celular</label> 
+                          <label class="form-control">{{contrato.celular}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <label class="form-control">{{contrato.email}}</label>
+                      <p class="help-block"></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Tipo de tramite</label>
+                        <label class="form-control">{{contrato.tipoTramite}}</label>
+                        <p class="help-block"></p>
+                      </div>
+                  </div> 
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+          <div class="panel panel-info">
+                <div class="panel-heading">
+                    Estados del Contrato
+                </div>
+              <div class="panel-body">
+                <div class="box-body">
+                  <table class="table table-hover" id="tabla_estados">
+                      <thead>
+                          <tr>
+                              <th>Estado</th>
+                              <th>Fecha y Hora</th>
+                              <th>Motivo</th>
+                          </tr>
+                      </thead>
+                      <tbody ng-repeat="estado in estadosContratos">
+                          <tr>
+                            <td>
+                                {{estado.estado}}
+                            </td>
+                            <td>
+                                {{estado.fechaString}}
+                            </td>
+                            <td>
+                                {{estado.descripcion}}
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                   <br/>
+                    <br/>
+                     <br/>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <label>Comisión pagada</label>
+                          <label class="form-control">{{contratoAux.comision}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4" ng-show="mostrarActivo">
+                      <div class="form-group">
+                          <label>Mes de Activación</label>
+                          <label class="form-control">{{contratoAux.mesActivacion}}</label>
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          
+        <!-- </div> -->
+
+             
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-primary" <a ui-sref="dashboard.ContratoListarVer" href="#">Volver</a></button>
+        </div>
+      </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

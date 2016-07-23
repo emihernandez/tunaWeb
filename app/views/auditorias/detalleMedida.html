@@ -1,0 +1,213 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Auditoría
+      <small>Detalle medida</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Auditoria</a></li>
+      <li class="active"><a href="#">Listar</a></li>
+      <li class="active"><a href="#">Realizar seguimiento</a></li>
+      <li class="active"><a href="#">Detalle medida</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+
+        <div class="panel panel-info">
+            <div class="panel-heading" ng-click="infoBasicaMedidaIsCollapsed = !infoBasicaMedidaIsCollapsed">
+                Información básica de la medida
+            </div>
+            <div collapse="infoBasicaMedidaIsCollapsed">
+              <div class="panel-body">
+
+                   <div class="row">
+
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                            <label>Id de la medida</label>
+                            <label class="form-control">{{medidaBuscada.id}}</label>
+                            <p class="help-block"></p>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Ahorro mensual</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <label class="form-control">{{medidaBuscada.ahorroMensual}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                           <label>Descripción</label>
+                           <textarea class="form-control" readonly rows="3">{{medidaBuscada.descripcion}}</textarea>
+                        </div>
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+                       <div class="form-group">
+                          <label>Medida</label>
+                          <label class="form-control">{{medidaBuscada.medida}}</label>
+                          <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Acepta</label>
+                          <label class="form-control">{{medidaBuscada.acepta}}</label>
+                          <p class="help-block"></p>
+                        </div>
+                    </div>
+
+              <div class="col-lg-12">
+               <div class="panel box box-info">
+                  <div class="box-header with-border">
+                     <h4 class="box-title">
+                        <a ng-click="aceptacionIsCollapsed = !aceptacionIsCollapsed">
+                        Seguimiento
+                        </a>
+                     </h4>
+                  </div>
+                  <div collapse="aceptacionIsCollapsed">
+                     <div class="box-body">
+                      <table class="table table-hover" id="tabla_medidas">
+                          <thead>
+                              <tr>
+                                  <th>Fecha</th>
+                                  <th>Título</th>
+                                  <th>Observaciones</th>
+                              </tr>
+                          </thead>
+                          <tbody ng-repeat="seguimiento in seguimientos">
+                              <tr>
+                                <td>
+                                  <a ng-click="actualizarSeguimiento(seguimiento)">
+                                    {{seguimiento.fechaString}}
+                                  </a>
+                                </td>
+                                <td>
+                                  <a ng-click="actualizarSeguimiento(seguimiento)">
+                                    {{seguimiento.titulo}}
+                                  </a>
+                                </td>
+                                <td>
+                                  <a ng-click="actualizarSeguimiento(seguimiento)">
+                                    {{seguimiento.observaciones}}
+                                  </a>
+                                </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-primary" type="submit" ng-click="nuevoSeguimiento()">Agregar seguimiento</button>
+                </div>
+              </div>
+             </div>
+          </div>
+          </div>
+
+          </div>
+
+          <div class="panel panel-info">
+              <div class="panel-heading">
+                  Implementación
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-6" >
+                    <div class="form-group" ng-controller='DatepickerDemoCtrl'>
+                      <label>Fecha de implementación</label>
+                        <p class="input-group">
+                          <input ng-model="medidaBuscada.fechaImplementacion" type="text" id="fechaimplementacion" name="fechaimplementacion" show-weeks="false" show-button-bar= "false" language= "es" min-date="fechaAuditoria"class="form-control" datepicker-popup="dd/MM/yyyy" datepicker-append-to-body="true" is-open="data1.isOpen" ng-click="data1.isOpen = true" >
+                          <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="data1.isOpen = !data1.isOpen;$event.stopPropagation();"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                       </p>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-6" >
+                    <div class="form-group">
+                      <label>Costo de la implementación</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">U$S</span>
+                        <input class="form-control" name="costo" type="number" ng-model="medidaBuscada.costoImplementacion">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                      <button class="btn btn-primary" type="submit" ng-click="actualizarMedida()">Guardar</button>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-lg-12">
+                   <div class="panel box box-info">
+                      <div class="box-header with-border">
+                         <h4 class="box-title">
+                            <a ng-click="comprobanteIsCollapsed = !comprobanteIsCollapsed">
+                            Subir comprobante
+                            </a>
+                         </h4>
+                      </div>
+                      <div collapse="comprobanteIsCollapsed">
+                        <div class="box-body">
+                          <!-- <div class="row" ng-controller="FileManagerCtrl" > -->
+                          <div class="row" ng-controller="SeguimientoCtrl" >
+                            <div class="col-lg-6" >
+                               <div class="form-group">
+                                <input type="file" class="form-control" ng-file="uploadComprobante" autofocus="autofocus"/>
+                                <br/>
+                                <div>
+                                    <button type="button" class="btn btn-primary" ng-click="cargarComprobante()">Subir</button>
+                                </div>
+                                <br/>
+                                <div ng-show="fileUploader.requesting">
+                                    <span class="label label-warning">{{"uploading" | translate}} ...</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="row">
+                            <div id="App2" ng-app="namesList" ng-controller="FileManagerCtrl">
+                                    <angular-filemanager auditoriaId="1"></angular-filemanager>  
+                            </div> 
+                          </div>  -->
+                        </div>
+                      </div>                   
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div id="fileContainer">
+            <div id="App2" ng-app="namesList" ng-controller="FileManagerCtrl">
+              <angular-filemanager auditoriaId="1"></angular-filemanager>  
+            </div> 
+          </div>
+          
+        <!-- </div> -->
+
+                     
+      </div>
+       <div class="row">
+          <div class="col-lg-3">
+              <button class="btn btn-primary" type="submit" ng-show="checkRol(1)" ng-click="volverASeguimiento()">Volver a seguimiento</button>
+          </div>
+        </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

@@ -1,0 +1,141 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form">                  
+                <div class="row">
+                  <div class="col-lg-12">
+                       <div class="form-inline">
+                          <label>Usuario:</label>
+                          <label>{{asignado}}</label>
+                          <p class="help-block"></p>
+                        </div>                         
+                    </div>
+                </div>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                  Seleccione una auditoria
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-3">                  
+                      <div ng-show="estado !='REALIZADO'" class="form-group">
+                            <!-- <label>Id auditoría</label> -->
+                            <a ng-click="goToBuscar()" > Buscar auditoria<a/>
+                      </div>                           
+                    </div>
+                    <div class="col-lg-4">                  
+                      <div class="form-group">
+                            <label>Id: &nbsp;{{auditoriaId}}</label><!-- <input ng-model="auditoriaId"/> -->
+                        </div>                           
+                    </div>
+                </div>                 
+                <div class="row">
+                  <div class="col-lg-3">
+                   <div class="form-group">
+                      <label>Matrícula</label>
+                      <label class="form-control">{{matricula}}</label>
+                      <p class="help-block"></p>
+                    </div>                         
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-group">
+                          <label>Razón social</label>
+                          <label class="form-control">{{razonSocial}}</label>
+                          <p class="help-block"></p>
+                        </div>                         
+                  </div>                  
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-info"  collapse="datosIsCollapsed">
+             <!--  <div class="panel-heading">
+                  Datos del evento {{estado}}
+              </div> -->
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-6" >
+                    <label>Fecha</label>
+                    <p ng-show="bMostrarGuardar"class="input-group" style="margin-top:35px;">
+                      <input  class="form-control" type="text" id="fecha" name="fecha" 
+                           ng-model="fechaDate" show-weeks="false" show-button-bar= "false" language= "es" 
+                           min-date="minDate" datepicker-popup="dd-MM-yyyy" datepicker-append-to-body="false" 
+                           is-open="data.isOpen" ng-click="data.isOpen = !data.isOpen" ng-change="fechaChanged()" > <!--  -->
+                           <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="data.isOpen = !data.isOpen;$event.stopPropagation();"><i class="glyphicon glyphicon-calendar"></i></button>
+                           </span>
+                    </p>
+                    <p ng-show="!bMostrarGuardar"class="input-group" style="margin-top:35px;">
+                      <input  class="form-control" readonly type="text" id="fecha" name="fecha" 
+                           ng-model="fechaDate" show-weeks="false" show-button-bar= "false" language= "es" 
+                           min-date="minDate" datepicker-popup="dd-MM-yyyy" datepicker-append-to-body="false" 
+                           is-open="data.isOpen" ng-click="data.isOpen = !data.isOpen" ng-change="fechaChanged()" > <!--  -->
+                           <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="data.isOpen = !data.isOpen;$event.stopPropagation();"><i class="glyphicon glyphicon-calendar"></i></button>
+                           </span>
+                    </p>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Hora</label> 
+                        <timepicker ng-show="bMostrarGuardar" ng-model="horaDate" ng-change="horaChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+                        <timepicker ng-show="!bMostrarGuardar" readonly-input="true"  ng-model="horaDate" ng-change="horaChanged()" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6" >
+                      <div class="form-group">
+                        <label>Tipo de evento</label>
+                        <select ng-show="bMostrarGuardar"  class="form-control" ng-model="tipo">
+                            <option value= "Realizar auditoría">Realizar auditoría</option>
+                            <option>Entregar informe</option>
+                            <option>Realizar seguimiento</option>
+                            <option>General</option>
+                        </select>
+                        <label ng-show="!bMostrarGuardar"class="form-control">{{tipo}}</label>
+                      </div>
+                  </div>
+                  <div class="col-lg-6" ng-show="bMostrarBorrar">
+                      <div class="form-group">
+                        <label>Estado</label>
+                        <label class="form-control">{{estado}}</label>
+                        <p class="help-block"></p>
+                      </div>
+                  </div>
+                  <div class="col-lg-12" >
+                      <div class="form-group">
+                        <label>Título</label>
+                        <input ng-show="bMostrarGuardar" class="form-control" ng-model="titulo"/>
+                        <label ng-show="!bMostrarGuardar"class="form-control">{{titulo}}</label>
+                        <p class="help-block"></p>
+                      </div>
+                  </div>
+                  <div class="col-lg-12" >
+                    <div class="form-group" ng-class="{ 'has-error' : form.descripcion.$invalid }">
+                        <label>Descripción</label>
+                         <textarea ng-show="!bMostrarGuardar" readonly class="form-control" rows="5" ng-model="descripcion"></textarea>
+                         <textarea ng-show="bMostrarGuardar" class="form-control" rows="5" ng-model="descripcion"></textarea>
+                        <p ng-show="form.descripcion.$invalid" class="help-block">Debe ingresar una descripción</p>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" class="btn btn-default" ng-show="bMostrarBorrar" data-dismiss="modal" ng-click="borrarEventoModal()">Borrar</button>
+              <button type="button" class="btn btn-info" ng-show="bMostrarCompletar" ng-click="completar()">Completar</button>
+              <button type="button" class="btn btn-primary" ng-show="bMostrarGuardar" ng-click="ok()">Guardar</button>
+          </div>
+          </form>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

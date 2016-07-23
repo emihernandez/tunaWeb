@@ -1,0 +1,195 @@
+
+                                         
+  <section class="content-header">
+    <h1>
+      Remito
+      <small>Modificar Remito</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Remito</a></li>
+      <li class="active"><a href="#">Modificar</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row col-lg-offset-1" style="padding-top: 5px;">
+        
+        <div class="col-lg-9" >
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                  Remito
+              </div>
+              <div class="panel-body">
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a >
+                        Datos del Remito
+                      </a>
+                    </h4>
+                  </div>
+                </div>  
+                  <div class="row" >
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Localidad</label> 
+                          <input class="form-control" name="localidad" ng-model="remito.localidad" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Departamento</label>
+                            <select class="form-control"  ng-model="remito.departamento">
+                                <option ng-repeat="dept in departamentosModificar" value="{{dept.nombre}}" >{{dept.nombre}}</option>
+                            </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" >
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Calle</label> 
+                          <input class="form-control" name="calle" ng-model="remito.calle" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Número de puerta</label> 
+                          <input class="form-control" name="numPuerta" ng-model="remito.nroPuerta" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Apto</label> 
+                          <input class="form-control" name="apto" ng-model="remito.apto" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" >
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Padrón</label> 
+                          <input class="form-control" name="padron" ng-model="remito.padron" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Manzana</label> 
+                          <input class="form-control" name="manzana" ng-model="remito.manzana" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Solar</label> 
+                          <input class="form-control" name="solar" ng-model="remito.solar" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" >
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Esquina 1</label> 
+                          <input class="form-control" name="padron" ng-model="remito.esquina1" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Esquina 2</label> 
+                          <input class="form-control" name="manzana" ng-model="remito.esquina2" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" >
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <label>Fecha de visita</label> 
+                          <input class="form-control" ng-model="remito.fechaVisita" type="date" >
+                          <p class="help-block"></p> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" >
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                          <label>Hora de visita</label> 
+                          <select class="form-control"  ng-model="remito.cuando">
+                                <option value="">Seleccione horario de visita</option>
+                                <option value="1">A partir de</option>
+                                <option value="2">Entre</option>
+                                <option value="3">Hasta</option>
+                            </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3" >
+                      <div class="form-group"> 
+                          <label></label>
+                          <input class="form-control" name="hora1" ng-model="remito.hora1" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1" ng-show="remito.cuando=='2'">
+                      <div class="form-group"> 
+                          <label></label><br>
+                          <label>y</label>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3" ng-show="remito.cuando=='2'">
+                      <div class="form-group"> 
+                          <label></label>
+                          <input class="form-control" name="hora2" ng-model="remito.hora2" >
+                          <p class="help-block"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label>Observaciones</label>
+                        <textarea class="form-control" rows="5" ng-model="remito.comentarios"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                <br/>
+                <div class="row">
+                  <div class="col-lg-2">
+                    <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="modificarRemito()">Modificar</button>
+                  </div>
+                
+
+                  <div class="col-lg-2">
+                    <button class="btn btn-primary" type="submit" ng-show="checkRol(0)" ng-click="volver()">Volver</button>
+                  </div>
+                </div>
+                <!-- /.panel-body -->
+              </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+  </section><!-- /.content -->
+
+

@@ -1,0 +1,131 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form"> 
+                <div class="form-group">
+                    <label>Equipo</label>
+                    <input class="form-control" ng-model="equipoAModificar.equipo" required>
+                </div>
+                <div class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" ng-model="equipoAModificar.marca">
+                          <option value = "">Seleccione una opción</option>
+                          <option value = "Alfa Solar">Alfa Solar</option>
+                          <option value = "Alosol">Alosol</option>
+                          <option value = "Astrosolar">Astrosolar</option>
+                          <option value = "Alfa Laval">Alfa Laval</option>
+                          <option value = "Ariston">Ariston</option>
+                          <option value = "Beusa">Beusa</option>
+                          <option value = "Bosch">Bosch</option>
+                          <option value = "Bronx">Bronx</option>
+                          <option value = "Bosio">Bosio</option>
+                          <option value = "Boumatic">Boumatic</option>
+                          <option value = "Babysun">Babysun</option>
+                          <option value = "Cosmosolar">Cosmosolar</option>
+                          <option value = "Coppens">Coppens</option>
+                          <option value = "Delne">Delne</option>
+                          <option value = "Dikler">Dikler</option>
+                          <option value = "De Laval">De Laval</option>
+                          <option value = "Dinamica">Dinamica</option>
+                          <option value = "El Trebol">El Trebol</option>
+                          <option value = "Enxuta">Enxuta</option>
+                          <option value = "Escorial">Escorial</option>
+                          <option value = "Ecosolar">Ecosolar</option>
+                          <option value = "Energy Green">Energy Green</option>
+                          <option value = "Fuco">Fuco</option>
+                          <option value = "Fagor">Fagor</option>
+                          <option value = "Futura">Futura</option>
+                          <option value = "Fullwood">Fullwood</option>
+                          <option value = "Gea">Gea</option>
+                          <option value = "Hyundai">Hyundai</option>
+                          <option value = "H2Sol">H2Sol</option>
+                          <option value = "Haier">Haier</option>
+                          <option value = "Kioto">Kioto</option>
+                          <option value = "Ima">Ima</option>
+                          <option value = "Injertada">Injertada</option>
+                          <option value = "Interplus">Interplus</option>
+                          <option value = "James">James</option>
+                          <option value = "LG">LG</option>
+                          <option value = "Longvie">Longvie</option>
+                          <option value = "Lely">Lely</option>
+                          <option value = "Nicoll">Nicoll</option>
+                          <option value = "Manovac">Manovac</option>
+                          <option value = "Masport">Masport</option>
+                          <option value = "Meriel">Meriel</option>
+                          <option value = "Miele">Miele</option>
+                          <option value = "Orbis">Orbis</option>
+                          <option value = "Orion">Orion</option>
+                          <option value = "Ormay">Ormay</option>
+                          <option value = "Philco">Philco</option>
+                          <option value = "Queen">Queen</option>
+                          <option value = "Ranser">Ranser</option>
+                          <option value = "Rheem">Rheem</option>
+                          <option value = "Rotel">Rotel</option>
+                          <option value = "Rodeg">Rodeg</option>
+                          <option value = "Ruakura">Ruakura</option>
+                          <option value = "Renovables del Sur">Renovables del Sur</option>
+                          <option value = "Saiar">Saiar</option>
+                          <option value = "Sirium">Sirium</option>
+                          <option value = "Solahart">Solahart</option>
+                          <option value = "Solar CIR">Solar CIR</option>
+                          <option value = "Solaris">Solaris</option>
+                          <option value = "Sunrain">Sunrain</option>
+                          <option value = "Sunstar">Sunstar</option>
+                          <option value = "Sac">Sac</option>
+                          <option value = "Stranco">Stranco</option>
+                          <option value = "Surge">Surge</option>
+                          <option value = "Senorial">Señorial</option>
+                          <option value = "Sherman">Sherman</option>
+                          <option value = "Splendid">Splendid</option>
+                          <option value = "Steieder">Steieder</option>
+                          <option value = "Tem">Tem</option>
+                          <option value = "Thermor">Thermor</option>
+                          <option value = "Thompson">Thompson</option>
+                          <option value = "Urumilk">Urumilk</option>
+                          <option value = "Volcan">Volcan</option>
+                          <option value = "Warners">Warners</option>
+                          <option value = "Zero Watt">Zero Watt</option>
+                          <option value = "Waikato">Waikato</option>
+                          <option value = "Westfalia">Westfalia</option>
+                          <option value="Otro">Otro</option>
+                      </select>
+                </div> 
+                <div class="form-group">
+                    <label>Modelo</label>
+                    <input class="form-control" ng-model="equipoAModificar.modelo">
+                </div>          
+                <div class="form-group" ng-class="{ 'has-error' : form.potencia.$invalid }">
+                    <label>Potencia (kW)</label>
+                    <input class="form-control" type="number" min="0" name="potencia" ng-model="equipoAModificar.potencia">
+                    <p ng-show="form.potencia.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>
+                <div class="form-group">
+                    <label>Capacidad (litros)</label>
+                    <input class="form-control" ng-model="equipoAModificar.capacidad">
+                </div>
+                <div  class="form-group">
+                  <label>Descripcion de uso</label>
+                  <textarea ng-model="equipoAModificar.descripcion" class="textarea" style="width: 95%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : form.horas.$invalid }">
+                    <label>Horas de uso</label>
+                    <input class="form-control" type="number" min="0" name="horas" ng-model="equipoAModificar.horas">
+                    <p ng-show="form.horas.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>             
+            </form>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ok()">Guardar</button>
+              <p ng-show="!equipoAModificar.equipo" class="help-block">Debe ingresar el tipo de equipo</p>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

@@ -1,0 +1,58 @@
+<!-- <div class="modal modal-danger">
+              <div class="modal-dialog"> -->
+             
+
+        <div class="panel panel-success"> 
+          <div class="panel-heading"> 
+             <h4 class="modal-title" >{{title}}</h4>
+            </div>
+          <div class="panel-body"> 
+            <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Fecha desde</label> 
+                    <input class="form-control" ng-model="fechasFiltro.fechaDesde" type="date" >
+                    <p class="help-block"></p> 
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Fecha hasta</label> 
+                    <input class="form-control" ng-model="fechasFiltro.fechaHasta" type="date" >
+                    <p class="help-block"></p> 
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                  <label>Departamento 1</label>
+                      <select ng-init="departamento1Seleccionado"
+                          ng-options="depto1Opcion.nombre for depto1Opcion in departamentosFiltrar" 
+                          ng-model="departamento1Seleccionado" ng-change="contratoFiltroComision()" ></select>
+                </div>
+
+                <div class="col-lg-6">
+                  <label>Departamento 2</label>
+                      <select ng-init="departamento2Seleccionado"
+                          ng-options="depto2Opcion.nombre for depto2Opcion in departamentosFiltrar" 
+                          ng-model="departamento2Seleccionado" ng-change="contratoFiltroComision()" ></select>
+                </div>
+            </div>
+          </br>
+          </br>
+            <div class="text-right text-bottom">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancelar</button>
+              <button type="button" class="btn btn-primary" ng-click="ok()">Confirmar</button>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+  
+<!--   </div><!-- /.modal-dialog -->
+
+

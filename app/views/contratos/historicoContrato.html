@@ -1,0 +1,71 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Historico del contrato</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Contrato</a></li>
+      <li class="active"><a href="#">Ver Historico</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+
+          <div class="panel panel-info">
+                <div class="panel-heading">
+                    Historico del Contrato
+                </div>
+              <div class="panel-body">
+                <div class="box-body">
+                  <table class="table table-hover" id="tabla_historico">
+                      <thead>
+                          <tr>
+                              <th>Fecha</th>
+                              <th>Usuario</th>
+                              <th>Tipo</th>
+                              <th>Descripcion</th>
+                          </tr>
+                      </thead>
+                      <tbody ng-repeat="historico in historicoContrato">
+                          <tr>
+                            <td>
+                                {{historico.fechaString}}
+                            </td>
+                            <td>
+                                {{historico.username}}
+                            </td>
+                            <td>
+                                {{historico.tipoString}}
+                            </td>
+                            <td>
+                                {{historico.descripcion}}
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                   <br/>
+                    <br/>
+                     <br/>
+                </div>
+
+              </div>
+            </div>
+
+          
+        <!-- </div> -->
+
+             
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-primary" <a ui-sref="dashboard.ContratoListarVer" href="#">Volver</a></button>
+        </div>
+      </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

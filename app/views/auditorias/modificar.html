@@ -1,0 +1,427 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Modificar auditoría</h1>
+    </div>  
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Información básica
+            </div>
+            <div class="panel-body">
+
+                   <div class="row">
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                        <form class="form-inline"> </form>
+                        <form class="form-inline">
+                          <label>Id auditoría  </label>
+                          <div class="form-group">
+                             <input class="form-control">
+                          </div>
+                          <button type="submit" class="btn btn-default">Buscar</button>
+                        </form>
+                      </div>
+
+                      <div class="form-group">
+                              <label>Mecanismo de contacto</label>
+                              <select class="form-control">
+                                  <option>Seleccione mecanismo de contacto</option>
+                                  <option>Llamada telefonica</option>
+                                  <option>Email</option>
+                                  <option>Web</option>
+                                  <option>Visita a la oficina</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <div class="input-group">
+                                  <span class="input-group-addon">$</span>
+                                  <input type="text" class="form-control" ng-model="auditoriaNueva.precio">
+                                </div>
+                            </div>
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <form class="form-inline"> </form>
+                        <form class="form-inline">
+                          <label>Matrícula productor </label>
+                          <div class="form-group">
+                             <input class="form-control">
+                          </div>
+                        </form>
+                      </div>
+
+                            <div class="form-group">
+                              <label>Tipo de auditoría</label>
+                              <select class="form-control">
+                                  <option>Seleccione tipo de auditoría</option>
+                                  <option>Sin registro</option>
+                                  <option>Con registro</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Notas</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                    </div>
+
+                  </div>
+                   </div>
+                  </div>
+                        <!-- /.panel-body -->
+
+                <div class="panel panel-info">
+            <div class="panel-heading">
+                Relevamiento telefónico
+            </div>
+            <div class="panel-body">
+
+                   <div class="row">
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                                <label>Remisión diaria promedio</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                      <div class="form-group">
+                              <label>Frecuencia de recolección en zafra</label>
+                              <select class="form-control">
+                                  <option>Seleccione frecuencia de recolección</option>
+                                  <option>Una vez al dia</option>
+                                  <option>Dos veces al dia</option>
+                                  <option>Cada 48 horas</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Horario aproximado</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Instalador recomendado</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+                      
+
+                        <div class="form-group">
+                                <label>Contacto de visita</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                         <div class="form-group">
+                                <label>Llega factura de UTE? En caso negativo, a donde?</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                        <div class="form-group">
+                                <label>Número máximo de vacas en ordeñe</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                       <div class="form-group">
+                                <label>Proyección de vacas a un año</label>
+                                <input class="form-control" >
+                                <p class="help-block"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Motivo por el cual se realiza la auditoría</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                    </div>
+
+                  </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Tanques de frío
+                                </div>
+                                <div class="panel-body">
+
+                                <div class="form-group">
+                                      <label>Cantidad de tanques</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                  <label>Marca</label>
+                                  <select class="form-control">
+                                      <option>Seleccione marca</option>
+                                      <option>Recuperador de calor</option>
+                                      <option>Colector solar</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Modelo</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+
+                                </div>  
+                            </div>
+
+                            <!-- Panel Maquina ordeñe(inicio) -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Maquina de ordeñe
+                                </div>
+                                <div class="panel-body">
+
+                                <div class="form-group">
+                                      <label>Cantidad de bombas</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Numero de organos</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Potencia de vacío</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Primer horario de ordeñe</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Segundo horario de ordeñe</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Duración de ordeñe</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                 <div class="checkbox">
+                              <label><input type="checkbox" value="">Tiene VSD</label>
+                            </div>
+
+                                 <div class="form-group">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+
+                                </div>  
+                            </div>
+                             <!-- Panel Maquina ordeñe (fin) -->
+
+                              <!-- Panel Electrica (inicio) -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Electrica
+                                </div>
+                                <div class="panel-body">
+
+                                <div class="form-group">
+                                  <label>Tensión de suministro</label>
+                                  <select class="form-control">
+                                      <option>Seleccione tensión de suministro</option>
+                                      <option>230V</option>
+                                      <option>400V</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                  <label>Tipo</label>
+                                  <select class="form-control">
+                                      <option>Seleccione tipo</option>
+                                      <option>Monofásico</option>
+                                      <option>Trifásico</option>
+                                  </select>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Medidor exclusivo para el tambo</label>
+                                  </div>
+
+
+                                <div class="form-group">
+                                      <label>Cantidad de casas que alimenta</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                  <label>Calidad de energía</label>
+                                  <select class="form-control">
+                                      <option>Seleccione calidad de energía</option>
+                                      <option>Buena</option>
+                                      <option>Cortes frecuentes</option>
+                                      <option>Baja tensión frecuente</option>
+                                  </select>
+                                </div>
+
+                                  <div class="form-group">
+                                      <label>Observaciones</label>
+                                      <textarea class="form-control" rows="3"></textarea>
+                                  </div>
+
+
+                                </div>  
+                            </div>
+                            <!-- Panel Electrica (fin) -->
+
+
+
+                            
+
+
+
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+
+                          <!-- Panel Calentamiento (inicio) -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Mecanismo de calentamiento
+                                </div>
+                                  <div class="panel-body">
+
+                                    <div class="form-group">
+                                    <label>Mecanismo</label>
+                                    <select class="form-control">
+                                        <option>Seleccione mecanismo de calentamiento</option>
+                                        <option>Recuperador de calor</option>
+                                        <option>Colector solar</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="checkbox">
+                                    <label><input type="checkbox" value="">Usa timer</label>
+                                  </div>
+
+                                       <div class="form-group">
+                                      <label>Observaciones</label>
+                                      <textarea class="form-control" rows="3"></textarea>
+                                  </div>
+
+                                </div>  
+                            </div>
+                            <!-- Panel Calentamiento (fin) -->
+
+                            <!-- Panel Intercambiado (inicio) -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Intercambiador de placas
+                                </div>
+                                  <div class="panel-body">
+
+                                  <div class="checkbox">
+                                    <label><input type="checkbox" value="">Tiene intercambiador de placas</label>
+                                  </div>
+
+                                       <div class="form-group">
+                                      <label>Observaciones</label>
+                                      <textarea class="form-control" rows="3"></textarea>
+                                  </div>
+
+                                </div>  
+                            </div>
+                            <!-- Panel Intercambiador(fin) -->
+
+                           
+
+                            <!-- Panel Riego (inicio) -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Riego
+                                </div>
+                                  <div class="panel-body">
+
+
+                                  <div class="checkbox">
+                                    <label><input type="checkbox" value="">Tiene riego</label>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label>Cantidad de bombas de agua</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Medidor aparte</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                <div class="form-group">
+                                      <label>Número de cuenta</label>
+                                      <input class="form-control">
+                                      <p class="help-block"></p>
+                                </div>
+
+                                       <div class="form-group">
+                                      <label>Observaciones</label>
+                                      <textarea class="form-control" rows="3"></textarea>
+                                  </div>
+
+                                </div>  
+                            </div>
+                            <!-- Panel Riego (fin) -->
+
+                            
+
+                            
+                    </div>
+
+      </div>
+
+                   </div>
+                  </div>
+
+
+                </div>
+                      <!-- /.panel -->
+                     <div class="col-lg-12">
+                      <button class="btn btn-success" ng-click="crearProductor()">Modificar</button>
+                    </div>    
+                        
+                    </div>
+                    
+                   
+                

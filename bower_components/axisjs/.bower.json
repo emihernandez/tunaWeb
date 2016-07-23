@@ -1,0 +1,83 @@
+{
+  "name": "axisJS",
+  "description": "Modular, Angular-based framework for creating basic charts",
+  "main": [
+    "dist/scripts/scripts.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "app/",
+    "test/",
+    "Gruntfile.js",
+    ".editorconfig",
+    ".jshintrc",
+    ".travis.yml",
+    ".gitignore",
+    "bower_components/",
+    "docs/",
+    "coverage/"
+  ],
+  "keywords": [
+    "charts",
+    "d3",
+    "c3",
+    "graphs",
+    "svg",
+    "png"
+  ],
+  "authors": [
+    "Ændrew Rininsland <aendrew.rininsland@thetimes.co.uk> (http://aendrew.com)"
+  ],
+  "homepage": "http://times.github.io/axisJS",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/times/axisJS.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "angular-animate": "~1.4.0",
+    "angular-touch": "~1.4.0",
+    "angular-sanitize": "~1.4.0",
+    "jquery": "~2.1.4",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap-sass-official": "~3.3.4",
+    "toastr": "~2.1.1",
+    "moment": "~2.10.3",
+    "animate.css": "~3.3.0",
+    "angular": "~1.4.0",
+    "js-yaml": "~3.3.1",
+    "angular-resource": "~1.4.1",
+    "c3": "aendrew/c3#title_options",
+    "papa-parse": "~4.1.1",
+    "bootstrap-colorselector": "*",
+    "canvg": "~1.3.0",
+    "angular-minicolors": "~0.0.5",
+    "jsonfn": "vkiryukhin/jsonfn",
+    "jspdf": "~1.0.272",
+    "angular-local-storage": "~0.2.2",
+    "angular-aside": "~1.1.3",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-bootstrap": "~0.12.0",
+    "angular-mocks": "~1.4.0",
+    "ngHandsontable": "0.7.0-beta2"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.0",
+    "angular-bootstrap": "0.12.1",
+    "moment": "~2.10.3",
+    "handsontable": "~0.18.0",
+    "ngHandsontable": "0.7.0-beta2"
+  },
+  "appPath": "src",
+  "version": "1.1.0",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "70adb786d70c0fba7d0487abbbe2a3d8a6d30c38"
+  },
+  "_source": "git://github.com/times/axisJS.git",
+  "_target": "~1.1.0",
+  "_originalSource": "axisjs"
+}

@@ -1,0 +1,55 @@
+<div class="modal-content">
+  <div class="modal-body">  
+    <div class="row">
+      <div class="col-lg-5">
+         <div class="form-group">
+            <label>Nombre</label>
+            <label class="form-control">{{filename}}</label>
+         </div>
+      </div>
+      <div class="col-lg-3">
+         <div class="form-group">
+            <label>Tipo</label>
+            <label class="form-control">{{type}}</label>
+         </div>
+      </div>
+      <div class="col-lg-4">
+         <div class="form-group">
+            <label>Tamaño</label>
+            <label class="form-control">{{size}}</label>
+         </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- <form role="form" name="form">              -->
+        <div class="col-lg-12" ng-show="fileIsImage">
+          <img id='fileImage' class="img-responsive"/>
+        </div>        
+        
+        <div class="col-lg-12 " ng-show="fileIsAudio">
+            <audio src="" id='fileAudio' controls>
+              <p>Su navegador no soporta <code>audio</code> element.</p>
+            </audio>
+        </div>
+        <div class="col-lg-12" ng-show="fileIsVideo">
+          <video  src="" id='fileVideo' width="320" height="240" controls>
+            <p>Su navegador no soporta <code>video</code> element.</p>
+          </video >
+        </div>
+      <!-- </form> -->
+    </div>
+  </div>
+  <div class="modal-footer" >
+      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+  </div>
+</div>
+<script>
+
+$('#modal').on('show.bs.modal', function () {
+       $(this).find('.modal-body').css({
+              width:'auto', //probably not needed
+              height:'auto', //probably not needed 
+              'max-height':'100%'
+       });
+});
+</script>

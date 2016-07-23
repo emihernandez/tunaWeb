@@ -1,0 +1,44 @@
+<!-- <div class="modal fade" id="editarContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+  <!-- <div class="modal-dialog"> -->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" name="form">              
+                <div class="form-group">
+                  <label>Marca</label>
+                  <select name="marca" class="form-control" ng-model="bombaAModificar.marca">
+                     <option value = "">Seleccione una opción</option>
+                     <option value = "Philips">Philips</option>
+                     <option value = "James">James</option>
+                     <option value = "Otro">Otro</option>
+                  </select>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : form.potenciaNominal.$invalid }">
+                    <label>Potencia Nominal</label>
+                    <input class="form-control" type="number" min="0" name="potenciaNominal" ng-model="bombaAModificar.potenciaNominal">
+                    <p ng-show="form.potenciaNominal.$invalid" class="help-block">Debe ingresar un número </p>
+                </div> 
+                <div class="form-group" ng-class="{ 'has-error' : form.potenciaNominal.$invalid }">
+                    <label>Caudar Nominal</label>
+                    <input class="form-control" type="number" min="0" name="caudalNominal" ng-model="bombaAModificar.caudalNominal">
+                    <p ng-show="form.caudalNominal.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>     
+                <div class="form-group" ng-class="{ 'has-error' : form.potenciaMedida.$invalid }">
+                    <label>Potencia Medida</label>
+                    <input class="form-control" type="number" min="0" name="potenciaMedida" ng-model="bombaAModificar.potenciaMedida">
+                    <p ng-show="form.potenciaMedida.$invalid" class="help-block">Debe ingresar un número </p>
+                </div>                
+            </form>
+          </div>
+          <div class="modal-footer" >
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()" >Cerrar</button>
+              <button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="ok()">Guardar</button>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+    <!-- </div> -->
+  <!-- /.modal-dialog -->
+<!-- </div> -->

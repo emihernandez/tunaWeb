@@ -1,0 +1,58 @@
+
+<aside class="main-sidebar">
+
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" style="padding-top:20px">
+      <!-- <li class="header"></li> -->
+     
+      <li class="treeview">
+        <!-- <a href="#"><i class="fa fa-truck"></i> <span>Productores</span> <i class="fa fa-angle-left pull-right"></i></a> -->
+        <a><i class="fa fa-truck"></i> <span>Ingreso</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <!--<li><a ui-sref="dashboard.productoresListar" href="#">Listar</a></li> -->
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.PersonaFisicaCrear" href="#">Contrato</a></li>
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.PersonaFisicaCrear" href="#">Ticket Soporte</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#"><i class="fa fa-eye"></i> <span>Consultas</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.ContratoListarVer" href="#">Ver Contratos</a></li>
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.RemitoListarVer" href="#">Ver Remitos</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#"><i class="fa fa-eye"></i> <span>Modificaciones</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.ContratoListarModificar" href="#">Modificar contratos</a></li>
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.RemitoListarModificar" href="#">Modificar remitos</a></li>
+          <li ng-show="checkRol(0)"><a ui-sref="dashboard.ContratoListarRecoordinar" href="#">Contratos para recoordinar</a></li>
+        </ul>
+      </li>
+      <li class="treeview" ng-show="checkRol(4)">
+        <a href="#"><i class="fa fa-eye"></i> <span>Generar</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li ng-show="checkRol(4)"><a ui-sref="dashboard.ContratoListarGenerar" href="#">Generar contrato</a></li>
+          <li ng-show="checkRol(4)"><a ui-sref="dashboard.RemitoListarGenerar" href="#">Generar remito</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a ui-sref="dashboard.home" href="#"><i class="fa fa-home"></i> <span>Dashboard</span></a>
+      </li>
+     <!--  <li class="treeview">
+        <a href="#"> <span>Prototipo</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li><a ui-sref="dashboard.prototipoOffline">Offline</a></li>
+        </ul>
+      </li> -->
+      <!-- Optionally, you can add icons to the links -->
+      <li ng-controller="LoginCtrl"><a ng-click="logout()"><i class="fa fa-power-off"></i> <span>Cerrar sesión</span></a></li>
+      <!-- <li class="fa fa-eye" ng-controller="LoginCtrl"><a ng-click="logout()">Cerrar sesiónn</a></li> -->
+      <!-- <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li> -->
+    </ul><!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

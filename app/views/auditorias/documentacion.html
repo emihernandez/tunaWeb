@@ -1,0 +1,149 @@
+<div style="min-height:970px">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Auditoría
+      <small>Obtener documentación preliminar</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-eye"></i> Auditoria</a></li>
+      <li class="active"><a href="#">Listar</a></li>
+      <li class="active"><a href="#">Obtener documentación preliminar</a></li>
+    </ol>
+  </section>
+
+  <section class="content">
+
+    <div class="row col-lg-offset-1" style="padding-top: 5px;" >
+      <div class="col-md-10">
+        <div class="panel panel-info">
+            <div class="panel-heading" ng-click="infoBasicaIsCollapsed = !infoBasicaIsCollapsed">
+                Información básica
+            </div>
+            <div collapse="infoBasicaIsCollapsed">
+              <div class="panel-body">
+
+                   <div class="row">
+
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                            <label>Id auditoría</label>
+                            <label class="form-control">{{auditoria.id}}</label>
+                            <p class="help-block"></p>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Precio</label>
+                            <label class="form-control">{{auditoria.precio}}</label>
+                            <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                           <label>Notas</label>
+                           <textarea class="form-control" readonly rows="3">{{auditoria.notas}}</textarea>
+                        </div>
+                            
+                    </div>
+
+                    <div class="col-lg-6">
+
+                       <div class="form-group">
+                          <label>Matrícula del productor</label>
+                          <label class="form-control">{{auditoria.matricula}}</label>
+                          <p class="help-block"></p>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Tipo de auditoría</label>
+                          <select class="form-control"  ng-model="auditoria.tipo" disabled>
+                              <option value="">Seleccione tipo de auditoria</option>
+                              <option value="0">Sin registro</option>
+                              <option value="1">Con registro</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Mecanismo de contacto</label>
+                          <select class="form-control"  ng-model="auditoria.mecanismoContacto" disabled>
+                              <option value="">Seleccione mecanismo de contacto</option>
+                              <option value="1">Llamada telefonica</option>
+                              <option value="2">Email</option>
+                              <option value="3">Web</option>
+                              <option value="4">Visita a la oficina</option>
+                          </select>
+                        </div>
+
+                            
+                    </div>
+
+                  </div>
+             </div>
+           </div>
+        </div>
+        
+        <!-- <div class="panel panel-info" ng-click="archivosIsCollapsed = !archivosIsCollapsed">
+          <div class="panel-heading">
+              Archivos asociados
+          </div> -->
+          <div id="App2" ng-app="namesList" ng-controller="FileManagerCtrl">
+            <angular-filemanager auditoriaId="1"></angular-filemanager>  
+          </div>
+
+
+
+          <div class="panel panel-info">
+                <div class="panel-heading">
+                    Subir datos de UTE
+                </div>
+                <div class="panel-body" ng-show="estadoUTE==1 || estadoUTE==2" >
+                <div class="row">
+                  <div class="col-lg-12" >
+                     <div class="form-group">
+                      <label> No puede subir los datos de UTE desde aquí ya que en el relevamiento telefónico no ingresó el número de cuenta. <label/>
+                      <label> Puede subir la planilla proporcionada por UTE desde el menú del productor en cualquier momento, o agregar el número de cuenta de UTE y marcar "Datos solicitados a UTE" en la sección "Eléctrica" del relevamiento telefónico para subirla desde aquí.<label/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                      <a  type="submit" ng-click="verAuditoria()">Ir a relevamiento telefónico</a>
+                      </br>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-body"  ng-show="estadoUTE==3 || estadoUTE==4" >
+                <div class="row" ng-controller="FileManagerCtrl" >
+                  <div class="col-lg-6" >
+                     <div class="form-group">
+                      <input type="file" class="form-control" ng-file="uploadFileListUTE" autofocus="autofocus"/>
+                      <br/>
+                      <div>
+                          <button type="button" class="btn btn-primary" ng-click="cargarUTE()">Subir</button>
+                      </div>
+                      <br/>
+                        <div class="modal-footer">
+                          <div ng-show="fileUploader.requesting">
+                              <span class="label label-warning">{{"uploading" | translate}} ...</span>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        <!-- </div> -->
+
+        
+                     
+      </div>
+            <div class="col-lg-12">
+                <button class="btn btn-primary" type="submit" ng-show="checkRol(1)" ng-click="finalizarObtenerDocumentacion()">Finalizar</button>
+            </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->                    
+                   
+                

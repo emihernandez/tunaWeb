@@ -1,0 +1,61 @@
+<div style="min-height:970px">
+  <section class="content-header">
+    <h1>
+      Contrato
+      <small>Listado de contratos</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-truck"></i> Contrato</a></li>
+      <li class="active"><a href="#">Listar</a></li>
+    </ol>
+  </section>
+  <section class="content">
+ 
+    
+    <div class="row col-lg-offset-1" style="padding-top: 50px;" >
+       <div class="col-lg-11 col-md-10">
+        <div class="box">           
+            <div class="box-body " >
+              <br/>
+                <div class="tableScroll">
+                  
+                  <div class="panel panel-info">
+                    <div class="panel-heading" >
+                      Filtros
+                    </div>
+                    <div >
+                      <div class="panel-body">
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <label>Estados</label>
+                                <select ng-init="estadoSeleccionado"
+                                      ng-options="estadoOpcion.nombre for estadoOpcion in contratoOpcionesEstados" ng-model="estadoSeleccionado" ng-change="contratoFiltroEstado()" ></select>
+                            </div>
+                            <div class="col-lg-5">
+                              <label>Comisión paga?</label>
+                              <select ng-init="comisionSeleccionado"
+                                      ng-options="comisionOpcion.text for comisionOpcion in contratoOpcionesComision" 
+                                      ng-model="comisionSeleccionado" ng-change="contratoFiltroComision()" ></select>
+                            </div>  
+                            <div class="col-lg-1">
+                              <button class="btn btn-default" ng-click="restablecerFiltrosVerContrato()">Restablecer filtros</button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row col-lg-12">
+                    <table id="listaContratosVer"  datatable="" dt-options="dtOptionsVer" dt-columns="dtColumnsVer" dt-instance="dtInstance" cellspacing="0" class="table table-bordered table-striped" width="100%"></table> 
+                  </div>
+               </div>
+              </table>
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+      </div>
+    </div>
+   
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+
