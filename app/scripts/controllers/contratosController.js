@@ -249,7 +249,8 @@ angular.module('sbAdminApp')
     $scope.volver = function(){
       $window.history.back();
     }
-    $scope.modificarContrato = function(accion){
+
+    $scope.modificarContrato = function(){
       if (!$scope.contratoModificarForm.$invalid){
         if($scope.checkRol(4) || $localStorage.tokenData.username == $scope.contrato.usuario){
           if($scope.contrato.celular){
@@ -258,12 +259,12 @@ angular.module('sbAdminApp')
             $scope.contrato.celular = celular;
           }
 
-          if($scope.aplicaTarifa)
+          if($scope.aplicaTarifaModificada === true)
             $scope.contrato.aplicaTarifa = 1;
           else
             $scope.contrato.aplicaTarifa = 0;
 
-          if($scope.aplicaTarifaNuevoServicio)
+          if($scope.aplicaTarifaNuevoServicio === true)
             $scope.contrato.aplicaTarifaNuevoServicio = 1;
           else
             $scope.contrato.aplicaTarifaNuevoServicio = 0;
@@ -519,13 +520,12 @@ angular.module('sbAdminApp')
                 $scope.contrato.servicioNombre = $scope.serviciosCambioAgente[i].nombre;
             }
           }
-
-          var cantEstados = $scope.estadosContratos.length;
+          
 
           if($scope.contrato.aplicaTarifa == 1){
-            $scope.aplicaTarifa = true;
+            $scope.aplicaTarifaModificada = true;
           } else {
-            $scope.aplicaTarifa = false;
+            $scope.aplicaTarifaModificada = false;
           }
 
           if($scope.contrato.aplicaTarifaNuevoServicio == 1){
@@ -536,7 +536,7 @@ angular.module('sbAdminApp')
 
           $scope.mostrarActivo = false;
 
-
+          var cantEstados = $scope.estadosContratos.length;
           for (var i = 0 ; i < cantEstados; i ++){
             if($scope.estadosContratos[i].estado == "ACTIVO" && !$scope.mostrarActivo){
               $scope.mostrarActivo = true;
@@ -649,6 +649,7 @@ angular.module('sbAdminApp')
             var fecha = new Date($scope.contrato.fechaNacimiento);
             fecha.setDate(fecha.getDate() + 1);
             $scope.contrato.fechaNacimiento = fecha;
+
 
             switch ($scope.contrato.tipoTramite) {
               case 1:
@@ -869,6 +870,53 @@ angular.module('sbAdminApp')
         ngToast.danger('No tiene permisos para exportar la base de remitos. Debe tener rol Administrador'); 
       }
     };
+
+
+    $scope.openModificarUsuarioIngresoContratoModal = function(idContrato){
+      if ($scope.checkRol(5)){ 
+        var body = '';
+        var title = 'Modificar usuario ingreso contrato';
+        var modalInstance = $modal.open({
+          templateUrl: 'views/contratos/modificarUsuarioIngresoContratoModal.html',
+          controller: 'ModificarUsuarioIngresoContratoModalCtrl',
+          resolve: {
+             numContratoIngresado: function () {
+              return $scope.usuario;
+              },
+              obtenerTitulo: function () {
+                return title;
+              },
+              obtenerBody: function () {
+                return body;
+              }
+            }
+        });
+        modalInstance.result.then(function (usuario) {
+          Contrato.modificarUsuarioIngresoContrato(idContrato,usuario)
+          .then(
+            function(res){
+              $scope.pop();
+              ngToast.success('Modificación realizada correctamente');
+              $scope.reloadDataModificar();
+              $state.go('dashboard.ContratoListarModificar');     
+            },
+            function(error){
+              console.log("Modificar usuario ingreso error : " + JSON.stringify(error));
+            });
+
+            
+        }, function () {
+          console.log('Modal dismissed at: ' + new Date());
+        });
+      } else {
+        ngToast.danger('No tiene permisos para generar un contrato. Debe tener rol Administrador.'); 
+      }
+    }
+
+
+
+
+
     
 
     $scope.openGenerarContratoModal = function (idContrato,tipoTramite,estado) {
@@ -1240,14 +1288,18 @@ angular.module('sbAdminApp')
                           '<a ng-click="ModificarEstadoContratoClicked(' + data.id + ')">' +
                           "Modificar Estado Contrato | " + '</a><br>' + 
                           '<a ng-click="EliminarContratoClicked(' + data.id + ')">' +
-                          "Eliminar Contrato" + '</a>'
+                          "Eliminar Contrato | " + '</a><br>' + 
+                          '<a ng-click="ModificarUsuarioIngresoContratoClicked(' + data.id + ')">' +
+                          "Modificar usuario ingreso contrato" + '</a>'
                   } else {
                     return  '<a ng-click="ModificarContratoClicked(' + data.id + ')">' +
                         "Modificar Contrato | " + '</a><br>' + 
                           '<a ng-click="ModificarEstadoContratoClicked(' + data.id + ')">' +
                           "Modificar Estado Contrato | " + '</a><br>' + 
                           '<a ng-click="EliminarContratoClicked(' + data.id + ')">' +
-                          "Eliminar Contrato" + '</a>'
+                          "Eliminar Contrato | " + '</a><br>' + 
+                          '<a ng-click="ModificarUsuarioIngresoContratoClicked(' + data.id + ')">' +
+                          "Modificar usuario ingreso contrato" + '</a>'
                   } 
                 } else if ($scope.checkRol(3)){
                   if((data.estado == "GENERADO") && (data.nroContrato == "")){
@@ -1422,6 +1474,13 @@ angular.module('sbAdminApp')
       $localStorage.filtroModificarContrato.estadoSeleccionado = $scope.contratoOpcionesEstados.indexOf($scope.estadoSeleccionado);
       $localStorage.filtroModificarContrato.comisionSeleccionado = $scope.contratoOpcionesComision.indexOf($scope.comisionSeleccionado);
       $scope.openBorrarContratoModal(id);
+    }
+
+    $scope.ModificarUsuarioIngresoContratoClicked = function (id){
+      $localStorage.filtroModificarContrato = {};
+      $localStorage.filtroModificarContrato.estadoSeleccionado = $scope.contratoOpcionesEstados.indexOf($scope.estadoSeleccionado);
+      $localStorage.filtroModificarContrato.comisionSeleccionado = $scope.contratoOpcionesComision.indexOf($scope.comisionSeleccionado);
+      $scope.openModificarUsuarioIngresoContratoModal(id);
     }
 
     $scope.AsignarNuevoContratoClicked = function(id){
@@ -1751,6 +1810,37 @@ angular.module('sbAdminApp').controller('ContratoModalCtrl', function ($scope, $
     $modalInstance.dismiss('cancel');
   };
 });
+
+
+angular.module('sbAdminApp').controller('ModificarUsuarioIngresoContratoModalCtrl', function ($scope, Usuario, $modalInstance, obtenerTitulo, obtenerBody) {
+
+  $scope.title = obtenerTitulo;
+  $scope.body = obtenerBody;
+
+  $scope.ok = function () {
+    
+    $modalInstance.close($scope.usuario);
+  };
+
+  $scope.obtenerUsuarios = function () {
+    Usuario.obtenerUsuarios()
+    .then(
+    function(res){
+      $scope.usuarios = res.data;
+      
+    },  
+    function(error){
+        ngToast.danger('Error obteniendo usuarios: ' + error.status + ', ' + error.statusText);            
+    });
+  }
+
+  $scope.obtenerUsuarios();
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
+
 
 angular.module('sbAdminApp').controller('ContratoEliminarModalCtrl', function ($scope, $modalInstance, obtenerTitulo, obtenerBody) {
 

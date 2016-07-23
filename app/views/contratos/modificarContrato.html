@@ -140,7 +140,7 @@
                                 </div>
                               </div>
 
-                              <div class="col-lg-6" ng-show="contrato.tipoTramite !== 1" ng-hide= "contrato.tipoTramite == 3" ng-if="contrato.tipoTramite !== 4">
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite == 2">
                                 <div class="form-group">
                                     <label>Servicio</label>
                                       <select class="form-control"  ng-model="contrato.servicio">
@@ -165,10 +165,10 @@
                               </div>
 
 
-                              <div class="col-lg-6" ng-show="contrato.tipoTramite !== 1" ng-hide= "contrato.tipoTramite == 3" ng-if="contrato.tipoTramite !== 4">
+                              <div class="col-lg-6" ng-show="contrato.tipoTramite == 2" >
                                 <div class="checkbox"  >
                                   <label></label>
-                                  <label><input type="checkbox"  value="aplicaTarifa" ng-model="aplicaTarifa" ng-init="aplicaTarifa">Aplica tarifa cambio de producto</label>
+                                  <label><input type="checkbox"  value="aplicaTarifaModificada" ng-model="aplicaTarifaModificada" ng-init="aplicaTarifaModificada">Aplica tarifa de nuevo producto</label>
                                 </div>
                               </div>
 

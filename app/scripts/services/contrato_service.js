@@ -86,14 +86,6 @@ angular.module('sbAdminApp')
             })
       },
       cargarCambioEstados : function(form) {
-        // return $http({
-            // url: serverUrl + '/productor/cargarUTE',
-            // method: "POST",
-            // data: form, 
-            // headers: {
-               // 'Content-type': undefined
-            // }
-        // })
         return $http.post(serverUrl + '/contratos/cargar_cambio_estados/',form, {
                 transformRequest: angular.identity,
                 headers: {
@@ -109,6 +101,9 @@ angular.module('sbAdminApp')
       },
       asignarNuevoNumeroContrato : function(idContrato,nuevoNum){
         return $http.post(serverUrl + '/contratos/asignar_nuevo_numero/' + idContrato, nuevoNum);
+      },
+      modificarUsuarioIngresoContrato : function(idContrato,nuevoUsuario){
+        return $http.post(serverUrl + '/contratos/modificar_usuario_ingreso/' + idContrato, nuevoUsuario);
       },
 
 

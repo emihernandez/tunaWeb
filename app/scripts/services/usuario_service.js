@@ -6,15 +6,21 @@ angular.module('sbAdminApp')
      
 		return {
       cache: {},
-			create : function(usuarioData) {
+			
+      obtenerUsuarios : function() {
+        return $http.get(serverUrl + '/usuarios');
+      },
+
+
+
+
+      create : function(usuarioData) {
 				return $http.post(serverUrl + '/usuario', usuarioData);
 			},
       update : function(usuarioData) {
         return $http.put(serverUrl + '/usuario', usuarioData);
       },
-      listar : function() {
-        return $http.get(serverUrl + '/usuario/lista');
-      },
+      
       buscarUsuario : function(username) {
         return $http.get(serverUrl + '/usuario?username=' + username);
       },

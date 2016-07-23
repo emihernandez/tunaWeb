@@ -8,7 +8,7 @@
  */
 angular.module('sbAdminApp')
   .controller('UsuarioCtrl', function($scope, $rootScope, $modal, $modalStack, ngToast, $timeout, $compile, $q, $state, $stateParams,
-                                            DTOptionsBuilder, DTColumnBuilder, VIEW_CONSTANTS, AuthService, Auditoria, VariablesComunes, Usuario) {
+                                            DTOptionsBuilder, DTColumnBuilder, VIEW_CONSTANTS, Usuario) {
 
     ngToast.settings.verticalPosition = 'bottom';
     ngToast.settings.horizontalPosition = 'right';
